@@ -1,0 +1,23 @@
+\newcounter{exercise}[section]
+\renewcommand{\theexercise}{\thesection.\arabic{exercise}}
+
+\NewDocumentEnvironment{solution}{O{}}
+  {%
+    \refstepcounter{exercise}%
+    \par\medskip
+    \noindent\textbf{习题 \theexercise\ifstrempty{#1}{}{：#1}}%
+    \par\nobreak\smallskip
+  }
+  {\par\medskip}
+
+\newcommand{\problem}[1]{%
+  \par\noindent\textbf{题目}\quad #1\par\smallskip
+}
+
+\newcommand{\answer}{%
+  \par\noindent\textbf{解答}\quad
+}
+
+\newcommand{\remarkline}[1]{%
+  \par\noindent\textcolor{blue!55!black}{\textbf{注}}\quad #1\par
+}

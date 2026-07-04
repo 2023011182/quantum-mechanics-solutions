@@ -1,0 +1,54 @@
+# Local automation / agent state
+.agents/
+.codex/
+
+# Build output directories
+build/
+_minted-*/
+
+# Published/generated PDFs
+/main.pdf
+/pdf/*.pdf
+!/pdf/.gitkeep
+
+# LaTeX auxiliary files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.brf
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lol
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex
+*.synctex.gz
+*.synctex.gz(busy)
+*.toc
+*.vrb
+*.xdv
+
+# Temporary/editor backup files
+*.bak
+*.tmp
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor/IDE local settings
+.idea/
+.vscode/
