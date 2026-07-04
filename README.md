@@ -1,6 +1,16 @@
-﻿# 《量子力学原理》习题解答 LaTeX 项目说明
+# 《量子力学原理》习题解答 LaTeX 项目说明
 
 这个项目把《量子力学原理》习题解答按“章 / 节”拆分成多个 LaTeX 源文件。这样做的目的，是让每一节的习题解答都能独立维护，并且可以按全书、单章或单节快速编译检查。
+
+本仓库是尚卡尔（R. Shankar）《量子力学原理》的习题解答整理项目。仓库中主要保存 LaTeX 源码、章节结构、编译脚本和全书发布版 PDF。
+
+全书发布版 PDF 位于：
+
+```text
+pdf/quantum-mechanics-solutions.pdf
+```
+
+这个 PDF 会跟随源码一起提交到 GitHub，方便直接下载阅读。`build/` 目录仍然是本地编译临时目录，不需要提交。
 
 ## 一、项目总体结构
 
@@ -499,7 +509,146 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\build.ps1 -Mode cl
 
 如果根目录中有直接编译产生的 `main.aux`、`main.log`、`main.out`、`main.toc`、`main.synctex.gz` 等文件，可以手动删除；它们不会影响源码。
 
-## 十一、常见问题
+## 十一、每次修改后的 Git 提交步骤
+
+以下命令都在项目根目录执行：
+
+```powershell
+cd "D:\Books\quantum-mechanics-solutions"
+```
+
+### 1. 查看当前修改
+
+```powershell
+git status
+```
+
+重点检查：
+
+- `chapters/`、`preamble/`、`main.tex`、`README.md` 等源码或文档修改是否符合预期。
+- `pdf/quantum-mechanics-solutions.pdf` 是否在重新编译后发生变化。
+- `build/`、`.agents/`、`.codex/`、临时 `.aux`、`.log`、`.toc` 文件不应该出现在待提交列表里。
+
+### 2. 修改习题或项目文件
+
+平时主要编辑对应章节的小节文件，例如：
+
+```text
+chapters/ch07/sec-03.tex
+```
+
+如果修改了导言区、宏命令、章节结构或说明文档，也可以同时提交对应文件。
+
+### 3. 重新编译全书 PDF
+
+提交前建议至少编译一次全书：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\build.ps1
+```
+
+成功后会生成：
+
+```text
+build/shankar-solutions.pdf
+pdf/quantum-mechanics-solutions.pdf
+```
+
+其中 `pdf/quantum-mechanics-solutions.pdf` 是要提交到 GitHub 的发布版 PDF。
+
+### 4. 再次检查修改
+
+```powershell
+git status
+```
+
+如果只改了某些文件，也可以查看具体差异：
+
+```powershell
+git diff
+```
+
+如果发布版 PDF 更新了，`git diff` 不会显示 PDF 内容，这是正常的；只要 `git status` 中出现 `pdf/quantum-mechanics-solutions.pdf`，说明 Git 已经检测到 PDF 变化。
+
+### 5. 加入暂存区
+
+如果确认本次所有修改都要提交，可以执行：
+
+```powershell
+git add .
+```
+
+如果只想提交部分文件，使用明确路径更稳妥，例如：
+
+```powershell
+git add chapters/ch07/sec-03.tex pdf/quantum-mechanics-solutions.pdf README.md
+```
+
+### 6. 确认暂存区内容
+
+```powershell
+git status
+```
+
+此时要确认 `Changes to be committed` 下面列出的文件就是本次准备提交的内容。
+
+也可以查看暂存区中的文本差异：
+
+```powershell
+git diff --cached
+```
+
+### 7. 创建提交
+
+提交信息要简短说明本次修改内容，例如：
+
+```powershell
+git commit -m "Add chapter 7 oscillator solutions"
+```
+
+如果只是更新全书 PDF，可以写：
+
+```powershell
+git commit -m "Update compiled solution PDF"
+```
+
+如果同时修改源码和 PDF，可以写：
+
+```powershell
+git commit -m "Update solutions and compiled PDF"
+```
+
+### 8. 推送到 GitHub
+
+```powershell
+git push
+```
+
+如果是第一次推送当前分支，使用：
+
+```powershell
+git push -u origin main
+```
+
+本仓库已经配置了远程仓库 `origin`，正常情况下后续只需要执行 `git push`。
+
+### 9. 完整示例
+
+一次常见的完整流程如下：
+
+```powershell
+git status
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\build.ps1
+git status
+git add .
+git status
+git commit -m "Update solutions and compiled PDF"
+git push
+```
+
+如果 `git status` 中出现不想提交的文件，不要继续 `git add .`，先确认 `.gitignore` 是否需要调整，或者改用 `git add 文件路径` 只提交本次需要的文件。
+
+## 十二、常见问题
 
 ### 找不到 `latexmk`
 

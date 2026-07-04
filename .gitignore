@@ -10,6 +10,7 @@ _minted-*/
 /main.pdf
 /pdf/*.pdf
 !/pdf/.gitkeep
+!/pdf/quantum-mechanics-solutions.pdf
 
 # LaTeX auxiliary files
 *.aux
