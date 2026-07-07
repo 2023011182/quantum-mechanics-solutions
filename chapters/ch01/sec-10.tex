@@ -1,12 +1,267 @@
 ﻿% !TeX root = ../../main.tex
 \section{推广到无穷维}
 
-% Write this section's exercise solutions here.
-% Exercise numbers are reset by section, for example 7.3.1.
-% Template:
-% \begin{solution}[short title or source exercise number]
-% \problem{Paste or summarize the problem here.}
-% \answer
-% Write the solution here.
-% \end{solution}
+\begin{solution}[δ函数缩放性质]
+\problem{证明 $\delta(ax)=\delta(x)/|a|$。（提示：考虑 $\int \delta(ax)\,d(ax)$，并记住 $\delta(x)=\delta(-x)$。）}
 
+\answer
+目标是证明一维δ函数在变量缩放下满足
+\[
+\delta(ax)=\frac{1}{|a|}\delta(x), \quad a\neq 0.
+\]
+
+严格证明采用“对任意测试函数的作用一致性”。设 $g(x)$ 为任意光滑且快速衰减函数，则δ函数的定义性质为
+\[
+\int_{-\infty}^{\infty}\delta(x)g(x)\,dx=g(0).
+\]
+
+现在考虑表达式 $\delta(ax)$ 对 $g(x)$ 的作用：
+\[
+I=\int_{-\infty}^{\infty}\delta(ax)\,g(x)\,dx.
+\]
+
+作变量代换 $y=ax$，则 $x=y/a$，且 $dx=dy/a$。于是
+\[
+I=\int_{-\infty}^{\infty}\delta(y)\,g(y/a)\,\frac{1}{|a|}\,dy.
+\]
+
+这里使用了 $dy/a$ 在积分区间反向时需引入绝对值，故得到 $1/|a|$。
+
+利用$ \delta $函数的抽样性质：
+\[
+\int \delta(y)\,h(y)\,dy = h(0),
+\]
+可得
+\[
+I=\frac{1}{|a|}g(0).
+\]
+
+另一方面，如果存在函数 $F(x)$ 满足
+\[
+F(x)=\frac{1}{|a|}\delta(x),
+\]
+则其对任意 $g(x)$ 的作用为
+\[
+\int F(x)g(x)\,dx=\frac{1}{|a|}g(0),
+\]
+与上式完全一致。
+
+因此在分布意义下必有
+\[
+\delta(ax)=\frac{1}{|a|}\delta(x).
+\]
+
+\end{solution}
+
+
+\begin{solution}[δ函数复合函数]
+\problem{ 证明
+\[
+\delta(f(x))=\sum_i \frac{\delta(x-x_i)}{\left|\frac{df}{dx}\right|_{x_i}},
+\]
+其中 $x_i$ 是 $f(x)$ 的零点。提示：考虑 $\delta(f(x))$ 在何处“发散”，并在零点附近对 $f(x)$ 作泰勒展开，保留首个非零项。}
+
+\answer
+设 $x_i$ 为 $f(x)$ 的简单零点，即 $f(x_i)=0$ 且 $f'(x_i)\neq 0$。由于$ \delta $函数的支撑只集中在函数为零的位置，因此 $\delta(f(x))$ 只在各零点附近有贡献。
+
+考虑任意测试函数 $g(x)$，研究积分
+\[
+I=\int \delta(f(x))\,g(x)\,dx.
+\]
+
+将积分分解为各零点邻域之和：
+\[
+I=\sum_i \int_{x\sim x_i} \delta(f(x))\,g(x)\,dx.
+\]
+
+在每个零点附近对 $f(x)$ 作泰勒展开，保留首项：
+\[
+f(x)=f(x_i)+ (x-x_i)f'(x_i)+\cdots \approx (x-x_i)f'(x_i).
+\]
+
+因此在该邻域内可作变量替换
+\[
+y=f(x)\approx f'(x_i)(x-x_i), \quad dy=f'(x_i)\,dx.
+\]
+
+于是积分变为
+\[
+\int_{x\sim x_i} \delta(f(x))g(x)\,dx
+=
+\int \delta(y)\,g(x(y))\,\frac{dy}{|f'(x_i)|}.
+\]
+
+利用$ \delta $函数抽样性质得
+\[
+=\frac{g(x_i)}{|f'(x_i)|}.
+\]
+
+将所有零点贡献相加：
+\[
+I=\sum_i \frac{g(x_i)}{|f'(x_i)|}.
+\]
+
+另一方面，如果存在分布恒等式
+\[
+\delta(f(x))=\sum_i \frac{\delta(x-x_i)}{|f'(x_i)|},
+\]
+则对任意 $g(x)$ 作用得到
+\[
+\int \left(\sum_i \frac{\delta(x-x_i)}{|f'(x_i)|}\right) g(x)\,dx
+=
+\sum_i \frac{g(x_i)}{|f'(x_i)|},
+\]
+与上式一致。
+
+因此在分布意义下成立
+\[
+\delta(f(x))=\sum_i \frac{\delta(x-x_i)}{|f'(x_i)|}.
+\]
+
+结论成立，前提是所有零点均为简单零点（即 $f'(x_i)\neq 0$）。
+\end{solution}
+
+\begin{solution}[$\theta$ 函数与 $\delta$ 函数关系]
+\problem{考虑阶跃函数 $\theta(x-x')$，当 $x-x'$ 为负时函数值为0，当 $x-x'$ 为正时函数值为1。证明
+\[
+\delta(x-x')=\frac{d}{dx}\theta(x-x').
+\]}
+
+\answer
+阶跃函数定义为
+\[
+\theta(x-x')=
+\begin{cases}
+0, & x<x',\\
+1, & x>x'.
+\end{cases}
+\]
+
+因此它在 $x\neq x'$ 的区域内是常数函数，故有
+\[
+\frac{d}{dx}\theta(x-x')=0,\quad x\neq x'.
+\]
+
+但在 $x=x'$ 处函数发生跳跃（从0跳到1），其导数在经典意义下不存在，但在分布意义下对应$ \delta $函数。
+
+为了严格说明这一点，考虑任意测试函数 $g(x)$，计算
+\[
+\int_{-\infty}^{\infty}\frac{d}{dx}\theta(x-x')\,g(x)\,dx.
+\]
+
+对其进行分部积分：
+\[
+=\left[\theta(x-x')g(x)\right]_{-\infty}^{\infty}-\int_{-\infty}^{\infty}\theta(x-x')g'(x)\,dx.
+\]
+
+由于 $\theta(x-x')=0$ 在 $x\to -\infty$，且 $\theta(x-x')=1$ 在 $x\to +\infty$，边界项为
+\[
+g(\infty)-0.
+\]
+
+更直接地将积分分段：
+\[
+\int_{x'}^{\infty} g'(x)\,dx = g(\infty)-g(x').
+\]
+
+于是得到
+\[
+\int \frac{d}{dx}\theta(x-x')\,g(x)\,dx = g(x').
+\]
+
+另一方面，$ \delta $函数满足定义性质
+\[
+\int \delta(x-x')g(x)\,dx=g(x').
+\]
+
+因此在分布意义下必有
+\[
+\frac{d}{dx}\theta(x-x')=\delta(x-x').
+\]
+
+结论成立，即$ \delta $函数可以视为阶跃函数的导数。
+\end{solution}
+
+
+\begin{solution}[弦的正常模展开（连续系统）]
+\problem{在 $t=0$ 时，一根弦的位移为
+\[
+\psi(x,0)=
+\begin{cases}
+\frac{2xh}{L}, & 0\le x \le \frac{L}{2},\\[4pt]
+\frac{2h}{L}(L-x), & \frac{L}{2}\le x \le L,
+\end{cases}
+\]
+证明其后续时间演化可以展开为
+\[
+\psi(x,t)=\sum_{m=1}^\infty \sin\!\left(\frac{m\pi x}{L}\right)\cos(\omega_m t)\cdot \frac{8h}{\pi^2 m^2}\sin\!\left(\frac{m\pi}{2}\right).
+\]}
+
+\answer
+对于两端固定的弦，其本征模为
+\[
+\phi_m(x)=\sqrt{\frac{2}{L}}\sin\!\left(\frac{m\pi x}{L}\right),
+\]
+因此任意初态可展开为
+\[
+\psi(x,t)=\sum_{m=1}^\infty \phi_m(x)\cos(\omega_m t)\langle m|\psi(0)\rangle.
+\]
+
+首先计算展开系数
+\[
+\langle m|\psi(0)\rangle=\sqrt{\frac{2}{L}}\int_0^L \sin\!\left(\frac{m\pi x}{L}\right)\psi(x,0)\,dx.
+\]
+
+将积分分段：
+\[
+=\sqrt{\frac{2}{L}}\left[\int_0^{L/2}\frac{2xh}{L}\sin\!\left(\frac{m\pi x}{L}\right)dx
++\int_{L/2}^L \frac{2h}{L}(L-x)\sin\!\left(\frac{m\pi x}{L}\right)dx\right].
+\]
+
+对第一项分部积分（取 $u=x$, $dv=\sin(\frac{m\pi x}{L})dx$），得
+\[
+\int_0^{L/2} x\sin\!\left(\frac{m\pi x}{L}\right)dx
+=
+-\frac{Lx}{m\pi}\cos\!\left(\frac{m\pi x}{L}\right)\Big|_0^{L/2}
++\frac{L}{m\pi}\int_0^{L/2}\cos\!\left(\frac{m\pi x}{L}\right)dx.
+\]
+
+计算可得
+\[
+=\frac{L^2}{m^2\pi^2}\sin\!\left(\frac{m\pi}{2}\right)
+-\frac{L^2}{2m\pi}\cos\!\left(\frac{m\pi}{2}\right).
+\]
+
+第二项同理计算：
+\[
+\int_{L/2}^L (L-x)\sin\!\left(\frac{m\pi x}{L}\right)dx
+=
+\frac{L^2}{m^2\pi^2}\sin\!\left(\frac{m\pi}{2}\right)
++\frac{L^2}{2m\pi}\cos\!\left(\frac{m\pi}{2}\right).
+\]
+
+两项相加后，余弦项相互抵消，只剩正弦项：
+\[
+\int_0^L \cdots dx
+=
+\frac{2L^2}{m^2\pi^2}\sin\!\left(\frac{m\pi}{2}\right).
+\]
+
+因此系数为
+\[
+\langle m|\psi(0)\rangle
+=
+\sqrt{\frac{2}{L}}\cdot \frac{2h}{L}\cdot \frac{2L^2}{m^2\pi^2}
+\sin\!\left(\frac{m\pi}{2}\right)
+=
+\frac{4h\sqrt{2L}}{m^2\pi^2}\sin\!\left(\frac{m\pi}{2}\right).
+\]
+
+代回展开式，并与归一化因子合并，可得最终结果
+\[
+\psi(x,t)=\sum_{m=1}^\infty \sin\!\left(\frac{m\pi x}{L}\right)\cos(\omega_m t)\cdot
+\frac{8h}{\pi^2 m^2}\sin\!\left(\frac{m\pi}{2}\right).
+\]
+
+证毕。
+\end{solution}

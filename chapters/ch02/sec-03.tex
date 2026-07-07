@@ -1,12 +1,99 @@
 ﻿% !TeX root = ../../main.tex
 \section{两体问题}
 
-% Write this section's exercise solutions here.
-% Exercise numbers are reset by section, for example 7.3.1.
-% Template:
-% \begin{solution}[short title or source exercise number]
-% \problem{Paste or summarize the problem here.}
-% \answer
-% Write the solution here.
-% \end{solution}
+\begin{solution}[变换到质心系]
+\problem{利用变量变换从 \((2.3.5)\) 式推导 \((2.3.6)\) 式。}
+\answer
+原来的两体问题拉格朗日量为
+\[
+\mathcal{L}
+=\frac{1}{2}m_1|\dot{\mathbf r}_1|^2+\frac{1}{2}m_2|\dot{\mathbf r}_2|^2
+-V(\mathbf r_1-\mathbf r_2).
+\]
+为了将其改写成质心运动和相对运动的形式，引入质心坐标 \(\mathbf r_{\rm cm}\) 与相对坐标 \(\mathbf r\)：
+\[
+\mathbf r_{\rm cm}=\frac{m_1\mathbf r_1+m_2\mathbf r_2}{m_1+m_2},\qquad
+\mathbf r=\mathbf r_1-\mathbf r_2.
+\]
+由这两个定义反解出 \(\mathbf r_1\) 和 \(\mathbf r_2\)。设 \(M=m_1+m_2\)，则
+\[
+\mathbf r_1=\mathbf r_{\rm cm}+\frac{m_2}{M}\mathbf r,\qquad
+\mathbf r_2=\mathbf r_{\rm cm}-\frac{m_1}{M}\mathbf r.
+\]
+对时间求导，得到
+\[
+\dot{\mathbf r}_1=\dot{\mathbf r}_{\rm cm}+\frac{m_2}{M}\dot{\mathbf r},\qquad
+\dot{\mathbf r}_2=\dot{\mathbf r}_{\rm cm}-\frac{m_1}{M}\dot{\mathbf r}.
+\]
+于是两个速度平方分别为
+\[
+|\dot{\mathbf r}_1|^2
+=
+|\dot{\mathbf r}_{\rm cm}|^2
++\frac{2m_2}{M}\dot{\mathbf r}_{\rm cm}\cdot\dot{\mathbf r}
++\frac{m_2^2}{M^2}|\dot{\mathbf r}|^2,
+\]
+\[
+|\dot{\mathbf r}_2|^2
+=
+|\dot{\mathbf r}_{\rm cm}|^2
+-\frac{2m_1}{M}\dot{\mathbf r}_{\rm cm}\cdot\dot{\mathbf r}
++\frac{m_1^2}{M^2}|\dot{\mathbf r}|^2.
+\]
+代入原拉格朗日量，得
+\[
+\begin{aligned}
+\mathcal{L}
+={}&\frac{1}{2}m_1\left(
+|\dot{\mathbf r}_{\rm cm}|^2
++\frac{2m_2}{M}\dot{\mathbf r}_{\rm cm}\cdot\dot{\mathbf r}
++\frac{m_2^2}{M^2}|\dot{\mathbf r}|^2
+\right)\\
+&+\frac{1}{2}m_2\left(
+|\dot{\mathbf r}_{\rm cm}|^2
+-\frac{2m_1}{M}\dot{\mathbf r}_{\rm cm}\cdot\dot{\mathbf r}
++\frac{m_1^2}{M^2}|\dot{\mathbf r}|^2
+\right)-V(\mathbf r).
+\end{aligned}
+\]
+整理各项。首先，质心速度平方项为
+\[
+\frac{1}{2}m_1|\dot{\mathbf r}_{\rm cm}|^2+\frac{1}{2}m_2|\dot{\mathbf r}_{\rm cm}|^2
+=\frac{1}{2}(m_1+m_2)|\dot{\mathbf r}_{\rm cm}|^2.
+\]
+其次，交叉项为
+\[
+\frac{1}{2}m_1\frac{2m_2}{M}\dot{\mathbf r}_{\rm cm}\cdot\dot{\mathbf r}
++\frac{1}{2}m_2\left(-\frac{2m_1}{M}\dot{\mathbf r}_{\rm cm}\cdot\dot{\mathbf r}\right)
+=0,
+\]
+因此质心运动和相对运动没有速度交叉项。最后，相对速度平方项为
+\[
+\frac{1}{2}m_1\frac{m_2^2}{M^2}|\dot{\mathbf r}|^2
++\frac{1}{2}m_2\frac{m_1^2}{M^2}|\dot{\mathbf r}|^2
+=\frac{1}{2}\frac{m_1m_2(m_1+m_2)}{M^2}|\dot{\mathbf r}|^2
+=\frac{1}{2}\frac{m_1m_2}{m_1+m_2}|\dot{\mathbf r}|^2.
+\]
+因此拉格朗日量化为
+\[
+\mathcal{L}
+=
+\frac{1}{2}(m_1+m_2)|\dot{\mathbf r}_{\rm cm}|^2
++\frac{1}{2}\frac{m_1m_2}{m_1+m_2}|\dot{\mathbf r}|^2
+-V(\mathbf r).
+\]
+若定义总质量 \(M=m_1+m_2\) 和约化质量
+\[
+\mu=\frac{m_1m_2}{m_1+m_2},
+\]
+则上式可写为更紧凑的形式
+\[
+\mathcal{L}
+=
+\frac{1}{2}M|\dot{\mathbf r}_{\rm cm}|^2
++\frac{1}{2}\mu|\dot{\mathbf r}|^2
+-V(\mathbf r).
+\]
+这就是由 \((2.3.5)\) 经过变量变换得到的 \((2.3.6)\) 式，表明两体问题可以分解为一个质量为 \(M\) 的自由质心运动，以及一个质量为 \(\mu\)、处在势 \(V(\mathbf r)\) 中的相对运动。
+\end{solution}
 

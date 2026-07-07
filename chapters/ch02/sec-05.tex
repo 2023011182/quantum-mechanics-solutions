@@ -1,12 +1,295 @@
 ﻿% !TeX root = ../../main.tex
 \section{哈密顿形式}
 
-% Write this section's exercise solutions here.
-% Exercise numbers are reset by section, for example 7.3.1.
-% Template:
-% \begin{solution}[short title or source exercise number]
-% \problem{Paste or summarize the problem here.}
-% \answer
-% Write the solution here.
-% \end{solution}
+\begin{solution}[动能]
+\problem{证明：如果 \(T=\sum_i\sum_j T_{ij}(q)\dot q_i\dot q_j\)，其中所有的 \(\dot q\) 都是广义速度，则 \(\sum_i p_i\dot q_i=2T\)。}
+\answer
+设系统的拉格朗日量为 \(\mathcal L=T-V\)。通常在本题所讨论的情形下，势能 \(V\) 只依赖广义坐标 \(q\)，而不依赖广义速度 \(\dot q\)，因此广义动量为
+\[
+p_i=\frac{\partial \mathcal L}{\partial \dot q_i}=\frac{\partial T}{\partial \dot q_i}.
+\]
+现在计算 \(T\) 对某一个广义速度 \(\dot q_s\) 的偏导数。由
+\[
+T=\sum_i\sum_j T_{ij}(q)\dot q_i\dot q_j
+\]
+可知，\(\dot q_s\) 可能出现在乘积 \(\dot q_i\dot q_j\) 的第一个因子中，也可能出现在第二个因子中。由于 \(T_{ij}(q)\) 只依赖广义坐标 \(q\)，不依赖广义速度，所以
+\[
+\frac{\partial T}{\partial \dot q_s}
+=
+\sum_j T_{sj}(q)\dot q_j+\sum_i T_{is}(q)\dot q_i.
+\]
+于是
+\[
+\sum_s p_s\dot q_s
+=
+\sum_s \frac{\partial T}{\partial \dot q_s}\dot q_s
+=
+\sum_s\left(\sum_j T_{sj}(q)\dot q_j+\sum_i T_{is}(q)\dot q_i\right)\dot q_s.
+\]
+展开并整理指标，得到
+\[
+\sum_s p_s\dot q_s
+=
+\sum_s\sum_j T_{sj}(q)\dot q_s\dot q_j
++
+\sum_i\sum_s T_{is}(q)\dot q_i\dot q_s.
+\]
+第一项正是
+\[
+\sum_s\sum_j T_{sj}(q)\dot q_s\dot q_j=T.
+\]
+第二项中指标 \(i,s\) 都是哑指标，可以重命名为 \(i,j\)，因此
+\[
+\sum_i\sum_s T_{is}(q)\dot q_i\dot q_s=T.
+\]
+所以
+\[
+\sum_s p_s\dot q_s=T+T=2T.
+\]
+因此证明了
+\[
+\boxed{\sum_i p_i\dot q_i=2T.}
+\]
+这个结论本质上是欧拉齐次函数定理的一个特例：当动能 \(T\) 是广义速度 \(\dot q_i\) 的二次齐次函数时，有 \(\sum_i \dot q_i\,\partial T/\partial \dot q_i=2T\)，而在势能不含速度的情况下 \(\partial T/\partial \dot q_i=p_i\)，故得到上述结果。
+\end{solution}
 
+\begin{solution}[谐振子的相空间轨迹]
+\problem{利用能量守恒，证明谐振子在相空间中的轨迹是一个形为 \((x/a)^2+(p/b)^2=1\) 的椭圆，其中 \(a^2=2E/k\) 和 \(b^2=2mE\)。}
+\answer
+对一维谐振子，取位移 \(x\) 为广义坐标，其势能为 \(\frac{1}{2}kx^2\)，动能为 \(\frac{1}{2}m\dot{x}^2\)。由于系统不显含时间，且没有非保守力，能量守恒。谐振子的总能量为
+\[
+E=\frac{1}{2}m\dot{x}^{2}+\frac{1}{2}kx^{2}.
+\]
+相空间通常用坐标 \((x,p)\) 描述，其中 \(p\) 是与 \(x\) 共轭的动量。对于普通一维谐振子，
+\[
+p=\frac{\partial L}{\partial \dot{x}}=m\dot{x},
+\]
+因此
+\[
+\dot{x}=\frac{p}{m}.
+\]
+将其代入能量表达式，得到
+\[
+E=\frac{1}{2}m\left(\frac{p}{m}\right)^2+\frac{1}{2}kx^2
+=\frac{p^2}{2m}+\frac{kx^2}{2}.
+\]
+将等式两边同除以 \(E\)，可得
+\[
+\frac{kx^2}{2E}+\frac{p^2}{2mE}=1.
+\]
+把它写成标准椭圆方程的形式：
+\[
+\frac{x^2}{2E/k}+\frac{p^2}{2mE}=1.
+\]
+令
+\[
+a^2=\frac{2E}{k},\qquad b^2=2mE,
+\]
+则上式化为
+\[
+\left(\frac{x}{a}\right)^2+\left(\frac{p}{b}\right)^2=1.
+\]
+因此，在能量固定为 \(E\) 的条件下，谐振子在相空间 \((x,p)\) 中的轨迹是一条椭圆。其在 \(x\) 轴方向的半轴长为 \(a=\sqrt{2E/k}\)，对应振子的最大位移；在 \(p\) 轴方向的半轴长为 \(b=\sqrt{2mE}\)，对应振子的最大动量。
+\end{solution}
+
+
+\begin{solution}[耦合质量问题的哈密顿形式]
+\problem{用哈密顿形式求解习题 2.1.2。}
+\answer
+习题 2.1.2 中的系统为两个相同质量 \(m\) 的物块在一维方向上运动，左、右两侧弹簧以及中间弹簧的劲度系数均为 \(k\)。取两个物块相对于平衡位置的位移分别为 \(x_1\) 和 \(x_2\)，则系统的动能为
+\[
+T=\frac{1}{2}m(\dot{x}_1^2+\dot{x}_2^2).
+\]
+系统的势能由三根弹簧贡献：左侧弹簧形变量为 \(x_1\)，右侧弹簧形变量为 \(x_2\)，中间弹簧形变量为 \(x_2-x_1\)，因此
+\[
+V=\frac{1}{2}k\left[x_1^2+x_2^2+(x_2-x_1)^2\right].
+\]
+由于系统势能不依赖速度，哈密顿量等于总能量，即
+\[
+\mathcal H=T+V
+=\frac{1}{2}m(\dot{x}_1^2+\dot{x}_2^2)
++\frac{1}{2}k\left[x_1^2+x_2^2+(x_2-x_1)^2\right].
+\]
+为了写成哈密顿形式，需要用广义动量代替广义速度。由
+\[
+p_1=\frac{\partial L}{\partial \dot{x}_1}=m\dot{x}_1,\qquad
+p_2=\frac{\partial L}{\partial \dot{x}_2}=m\dot{x}_2,
+\]
+可得
+\[
+\dot{x}_1=\frac{p_1}{m},\qquad \dot{x}_2=\frac{p_2}{m}.
+\]
+因此哈密顿量为
+\[
+\mathcal H(x_1,x_2,p_1,p_2)
+=
+\frac{1}{2m}(p_1^2+p_2^2)
++\frac{1}{2}k\left[x_1^2+x_2^2+(x_2-x_1)^2\right].
+\]
+下面使用哈密顿正则方程
+\[
+\dot{x}_i=\frac{\partial \mathcal H}{\partial p_i},\qquad
+\dot{p}_i=-\frac{\partial \mathcal H}{\partial x_i},\qquad i=1,2.
+\]
+首先，对动量求偏导，得到
+\[
+\dot{x}_1=\frac{\partial \mathcal H}{\partial p_1}=\frac{p_1}{m},\qquad
+\dot{x}_2=\frac{\partial \mathcal H}{\partial p_2}=\frac{p_2}{m},
+\]
+这与 \(p_i=m\dot{x}_i\) 一致。然后，对坐标求偏导。对 \(x_1\) 有
+\[
+\frac{\partial \mathcal H}{\partial x_1}
+=
+\frac{1}{2}k\frac{\partial}{\partial x_1}\left[x_1^2+x_2^2+(x_2-x_1)^2\right]
+=
+k(2x_1-x_2),
+\]
+所以
+\[
+\dot{p}_1=-\frac{\partial \mathcal H}{\partial x_1}
+=-2kx_1+kx_2.
+\]
+由于 \(p_1=m\dot{x}_1\)，故 \(\dot{p}_1=m\ddot{x}_1\)，于是
+\[
+m\ddot{x}_1=-2kx_1+kx_2.
+\]
+类似地，对 \(x_2\) 有
+\[
+\frac{\partial \mathcal H}{\partial x_2}
+=
+\frac{1}{2}k\frac{\partial}{\partial x_2}\left[x_1^2+x_2^2+(x_2-x_1)^2\right]
+=
+k(2x_2-x_1),
+\]
+所以
+\[
+\dot{p}_2=-\frac{\partial \mathcal H}{\partial x_2}
+=kx_1-2kx_2.
+\]
+由于 \(p_2=m\dot{x}_2\)，故 \(\dot{p}_2=m\ddot{x}_2\)，于是
+\[
+m\ddot{x}_2=kx_1-2kx_2.
+\]
+因此由哈密顿形式得到的运动方程为
+\[
+\begin{cases}
+m\ddot{x}_1=-2kx_1+kx_2,\\[4pt]
+m\ddot{x}_2=kx_1-2kx_2.
+\end{cases}
+\]
+或者写成
+\[
+\begin{cases}
+\ddot{x}_1=-\dfrac{2k}{m}x_1+\dfrac{k}{m}x_2,\\[6pt]
+\ddot{x}_2=\dfrac{k}{m}x_1-\dfrac{2k}{m}x_2.
+\end{cases}
+\]
+这与习题 2.1.2 中由拉格朗日形式得到的结果完全一致，说明对于该保守系统，哈密顿形式与拉格朗日形式给出相同的动力学方程。
+\end{solution}
+
+
+\begin{solution}[两体问题的哈密顿量]
+\problem{证明与 \((2.3.6)\) 式中的 \(\mathcal L\) 对应的 \(\mathcal H\) 为 \(\mathcal H=|\mathbf p_{\rm CM}|^2/2M+|\mathbf p|^2/2\mu+V(\mathbf r)\)，其中 \(M\) 是总质量，\(\mu\) 是约化质量，\(\mathbf p_{\rm CM}\) 和 \(\mathbf p\) 分别是与 \(\mathbf r_{\rm CM}\) 和 \(\mathbf r\) 共轭的动量。}
+\answer
+由 \((2.3.6)\) 式，两体问题在质心坐标和相对坐标下的拉格朗日量为
+\[
+\mathcal L
+=
+\frac{1}{2}M|\dot{\mathbf r}_{\rm CM}|^2
++
+\frac{1}{2}\mu|\dot{\mathbf r}|^2
+-
+V(\mathbf r),
+\]
+其中
+\[
+M=m_1+m_2,\qquad
+\mu=\frac{m_1m_2}{m_1+m_2}.
+\]
+这里 \(\mathbf r_{\rm CM}\) 是质心坐标，\(\mathbf r\) 是相对坐标。根据共轭动量的定义，有
+\[
+\mathbf p_{\rm CM}
+=
+\frac{\partial \mathcal L}{\partial \dot{\mathbf r}_{\rm CM}}
+=
+M\dot{\mathbf r}_{\rm CM},
+\qquad
+\mathbf p
+=
+\frac{\partial \mathcal L}{\partial \dot{\mathbf r}}
+=
+\mu\dot{\mathbf r}.
+\]
+因此速度可以用动量表示为
+\[
+\dot{\mathbf r}_{\rm CM}=\frac{\mathbf p_{\rm CM}}{M},
+\qquad
+\dot{\mathbf r}=\frac{\mathbf p}{\mu}.
+\]
+哈密顿量由勒让德变换给出：
+\[
+\mathcal H
+=
+\mathbf p_{\rm CM}\cdot \dot{\mathbf r}_{\rm CM}
++
+\mathbf p\cdot \dot{\mathbf r}
+-
+\mathcal L.
+\]
+将 \(\mathbf p_{\rm CM}=M\dot{\mathbf r}_{\rm CM}\) 和 \(\mathbf p=\mu\dot{\mathbf r}\) 代入，先得到
+\[
+\mathbf p_{\rm CM}\cdot \dot{\mathbf r}_{\rm CM}
++
+\mathbf p\cdot \dot{\mathbf r}
+=
+M|\dot{\mathbf r}_{\rm CM}|^2+\mu|\dot{\mathbf r}|^2.
+\]
+于是
+\[
+\begin{aligned}
+\mathcal H
+&=
+M|\dot{\mathbf r}_{\rm CM}|^2+\mu|\dot{\mathbf r}|^2
+-\left(
+\frac{1}{2}M|\dot{\mathbf r}_{\rm CM}|^2
++
+\frac{1}{2}\mu|\dot{\mathbf r}|^2
+-
+V(\mathbf r)
+\right)\\
+&=
+\frac{1}{2}M|\dot{\mathbf r}_{\rm CM}|^2
++
+\frac{1}{2}\mu|\dot{\mathbf r}|^2
++
+V(\mathbf r).
+\end{aligned}
+\]
+最后用动量替换速度：
+\[
+\frac{1}{2}M|\dot{\mathbf r}_{\rm CM}|^2
+=
+\frac{1}{2}M\left|\frac{\mathbf p_{\rm CM}}{M}\right|^2
+=
+\frac{|\mathbf p_{\rm CM}|^2}{2M},
+\]
+以及
+\[
+\frac{1}{2}\mu|\dot{\mathbf r}|^2
+=
+\frac{1}{2}\mu\left|\frac{\mathbf p}{\mu}\right|^2
+=
+\frac{|\mathbf p|^2}{2\mu}.
+\]
+因此
+\[
+\mathcal H
+=
+\frac{|\mathbf p_{\rm CM}|^2}{2M}
++
+\frac{|\mathbf p|^2}{2\mu}
++
+V(\mathbf r).
+\]
+这正是需要证明的结果。该式表明，两体问题的哈密顿量分解为质心平动动能、相对运动动能以及只依赖相对坐标的相互作用势能。
+\end{solution}

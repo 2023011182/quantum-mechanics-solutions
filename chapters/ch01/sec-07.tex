@@ -1,12 +1,111 @@
 ﻿% !TeX root = ../../main.tex
 \section{主动变换和被动变换}
 
-% Write this section's exercise solutions here.
-% Exercise numbers are reset by section, for example 7.3.1.
-% Template:
-% \begin{solution}[short title or source exercise number]
-% \problem{Paste or summarize the problem here.}
-% \answer
-% Write the solution here.
-% \end{solution}
+\begin{solution}[迹的性质与酉变换不变性]
+\problem{矩阵的迹定义为对角元之和
+\[
+\mathrm{Tr}\,\Omega=\sum_i \Omega_{ii}.
+\]
+证明：
+(1) $\mathrm{Tr}(\Omega\Lambda)=\mathrm{Tr}(\Lambda\Omega)$；
+(2) $\mathrm{Tr}(\Omega\Lambda\theta)=\mathrm{Tr}(\Lambda\theta\Omega)=\mathrm{Tr}(\theta\Omega\Lambda)$（循环性）；
+(3) 在正交归一基变换 $|i\rangle \to U|i\rangle$ 下，算符迹不变，即 $\mathrm{Tr}\,\Omega=\mathrm{Tr}(U\Omega U^\dagger)$.}
 
+\answer
+
+\textbf{(1) 证明 $\mathrm{Tr}(\Omega\Lambda)=\mathrm{Tr}(\Lambda\Omega)$：}
+
+按分量展开：
+\[
+\mathrm{Tr}(\Omega\Lambda)=\sum_i (\Omega\Lambda)_{ii}
+=\sum_{i,j}\Omega_{ij}\Lambda_{ji}.
+\]
+交换求和指标 $i\leftrightarrow j$ 得
+\[
+\sum_{i,j}\Omega_{ij}\Lambda_{ji}
+=\sum_{i,j}\Lambda_{ij}\Omega_{ji}
+=\mathrm{Tr}(\Lambda\Omega).
+\]
+
+\textbf{(2) 证明循环性 $\mathrm{Tr}(\Omega\Lambda\theta)$：}
+
+同理展开：
+\[
+\mathrm{Tr}(\Omega\Lambda\theta)
+=\sum_{i,j,k}\Omega_{ij}\Lambda_{jk}\theta_{ki}.
+\]
+
+循环重排指标可得：
+\[
+\sum_{i,j,k}\Omega_{ij}\Lambda_{jk}\theta_{ki}
+=\sum_{i,j,k}\Lambda_{ij}\theta_{jk}\Omega_{ki}
+=\mathrm{Tr}(\Lambda\theta\Omega),
+\]
+同理再循环一次得到
+\[
+\mathrm{Tr}(\Omega\Lambda\theta)=\mathrm{Tr}(\Lambda\theta\Omega)=\mathrm{Tr}(\theta\Omega\Lambda).
+\]
+
+
+\textbf{(3) 酉变换下迹不变性：}
+
+设基变换为 $|i\rangle \to U|i\rangle$，则算符变换为相似变换
+\[
+\Omega' = U\Omega U^\dagger.
+\]
+
+计算其迹：
+\[
+\mathrm{Tr}(\Omega')=\mathrm{Tr}(U\Omega U^\dagger).
+\]
+
+利用循环性（第(2)问结果）：
+\[
+\mathrm{Tr}(U\Omega U^\dagger)
+=\mathrm{Tr}(\Omega U^\dagger U)
+=\mathrm{Tr}(\Omega I)
+=\mathrm{Tr}(\Omega).
+\]
+
+\textbf{结论：}
+\[
+\mathrm{Tr}(\Omega\Lambda)=\mathrm{Tr}(\Lambda\Omega),\quad
+\mathrm{Tr}(\Omega\Lambda\theta)\ \text{具有循环不变性},\quad
+\mathrm{Tr}(U\Omega U^\dagger)=\mathrm{Tr}(\Omega).
+\]
+迹在酉相似变换下保持不变。
+\end{solution}
+
+
+\begin{solution}[酉变换下行列式不变性]
+\problem{证明矩阵的行列式在酉变换的基变换下不变，即
+\[
+\det \Omega = \det(U^\dagger \Omega U).
+\]}
+
+\answer
+利用行列式的乘法性质，有
+\[
+\det(U^\dagger \Omega U)=\det(U^\dagger)\det(\Omega)\det(U).
+\]
+
+由于 $U$ 为酉矩阵，满足 $U^\dagger U=I$，对两边取行列式得
+\[
+\det(U^\dagger U)=\det(I)=1,
+\]
+即
+\[
+\det(U^\dagger)\det(U)=1.
+\]
+
+因此
+\[
+\det(U^\dagger \Omega U)=\det(\Omega)\,\big(\det(U^\dagger)\det(U)\big)=\det(\Omega).
+\]
+
+\textbf{结论：}
+行列式在酉相似变换（单位正交基变换）下保持不变，即
+\[
+\det \Omega = \det(U^\dagger \Omega U).
+\]
+\end{solution}

@@ -1,12 +1,205 @@
 ﻿% !TeX root = ../../main.tex
 \section{线性矢量空间：基}
+\begin{solution}[零向量与加法逆的基本性质]
+\problem{
+我们注意到线性空间的公理意味着以下结论成立：\\
+（1）$|0\rangle$ 是唯一的，即如果 $|0'\rangle$ 也具有 $|0\rangle$ 的所有性质，则 $|0\rangle = |0'\rangle$；\\
+（2）$0|V\rangle = |0\rangle$；\\
+（3）$|-V\rangle = -|V\rangle$；\\
+（4）$|-V\rangle$ 是 $|V\rangle$ 唯一的加法逆元。\\[4pt]
+证明上述说法的正确性。提示如下：对于第一个，考虑 $|0\rangle + |0'\rangle$ 并利用零向量性质；对于第二个，从
+$|0\rangle = (0+1)|V\rangle + |-V\rangle$ 出发；对于第三个，从 $|V\rangle + |-V\rangle = 0|V\rangle = |0\rangle$ 出发；对于最后一个，设 $|W\rangle$ 满足 $|V\rangle + |W\rangle = |0\rangle$，并利用零向量唯一性进行比较。
+}
 
-% Write this section's exercise solutions here.
-% Exercise numbers are reset by section, for example 7.3.1.
-% Template:
-% \begin{solution}[short title or source exercise number]
-% \problem{Paste or summarize the problem here.}
-% \answer
-% Write the solution here.
-% \end{solution}
+\answer
+(1) 零向量唯一性：设 $|0\rangle$ 与 $|0'\rangle$ 都是线性空间中的零向量。由 $|0\rangle$ 的零向量性质，
+\[
+|0'\rangle + |0\rangle = |0'\rangle .
+\]
+由 $|0'\rangle$ 的零向量性质，
+\[
+|0\rangle + |0'\rangle = |0\rangle .
+\]
+再由向量加法交换律，$|0'\rangle+|0\rangle=|0\rangle+|0'\rangle$，故
+\[
+|0'\rangle = |0'\rangle+|0\rangle
+= |0\rangle+|0'\rangle
+= |0\rangle .
+\]
+因此零向量唯一。
 
+(2) 证明 $0|V\rangle = |0\rangle$：由标量乘法的单位元性质与分配律，
+\[
+|V\rangle=(0+1)|V\rangle=0|V\rangle+1|V\rangle
+=0|V\rangle+|V\rangle .
+\]
+两边右加 $|-V\rangle$，并利用结合律，得
+\[
+(0|V\rangle+|V\rangle)+|-V\rangle
+=|V\rangle+|-V\rangle .
+\]
+于是
+\[
+0|V\rangle+(|V\rangle+|-V\rangle)=|0\rangle .
+\]
+由于 $|V\rangle+|-V\rangle=|0\rangle$，上式化为
+\[
+0|V\rangle+|0\rangle=|0\rangle .
+\]
+由零向量性质可知 $0|V\rangle+|0\rangle=0|V\rangle$，所以
+\[
+0|V\rangle=|0\rangle .
+\]
+
+(3) 证明 $|-V\rangle = -|V\rangle$：先证明 $-|V\rangle$ 也是 $|V\rangle$ 的加法逆元。这里 $-|V\rangle$ 表示 $(-1)|V\rangle$，故
+\[
+|V\rangle+(-|V\rangle)
+=1|V\rangle+(-1)|V\rangle
+=(1-1)|V\rangle
+=0|V\rangle
+=|0\rangle .
+\]
+另一方面，由 $|-V\rangle$ 的含义，$|V\rangle+|-V\rangle=|0\rangle$。因此 $|-V\rangle$ 与 $-|V\rangle$ 都是 $|V\rangle$ 的加法逆元。
+
+(4) 加法逆唯一性：设 $|W\rangle$ 也是 $|V\rangle$ 的加法逆元，即
+\[
+|V\rangle+|W\rangle=|0\rangle .
+\]
+由于 $|-V\rangle$ 也满足 $|V\rangle+|-V\rangle=|0\rangle$，有
+\[
+\begin{aligned}
+|W\rangle
+&= |0\rangle+|W\rangle \\
+&= (|-V\rangle+|V\rangle)+|W\rangle \\
+&= |-V\rangle+(|V\rangle+|W\rangle) \\
+&= |-V\rangle+|0\rangle \\
+&= |-V\rangle .
+\end{aligned}
+\]
+所以 $|V\rangle$ 的加法逆元唯一。于是第 (3) 中两个加法逆元必须相等，即
+\[
+|-V\rangle=-|V\rangle .
+\]
+
+综上，四个结论成立。
+\end{solution}
+
+
+\begin{solution}[三元组空间的结构分析]
+\problem{
+考虑所有形如 $(a,b,c)$ 的实数组成的集合，其中 $a,b,c\in\mathbb{R}$。其加法与标量乘法定义为
+\[
+(a,b,c)+(d,e,f)=(a+d,b+e,c+f), \qquad \alpha(a,b,c)=(\alpha a,\alpha b,\alpha c).
+\]
+(1) 写出零向量与 $(a,b,c)$ 的加法逆元；\\
+(2) 证明所有形如 $(a,b,1)$ 的向量在上述运算下不构成线性空间。
+}
+
+\answer
+(1) 零向量由加法定义直接确定。设 $(0,0,0)$，则对任意 $(a,b,c)$ 有
+$(a,b,c)+(0,0,0)=(a,b,c)$，故零向量为 $(0,0,0)$。
+
+加法逆元定义为满足 $(a,b,c)+(x,y,z)=(0,0,0)$ 的向量，逐坐标比较得
+$x=-a,\ y=-b,\ z=-c$，因此
+$(a,b,c)$ 的加法逆元为 $(-a,-b,-c)$。
+
+(2) 讨论集合 $S=\{(a,b,1)\mid a,b\in\mathbb{R}\}$ 是否构成线性空间。
+
+首先检查加法封闭性。取任意 $(a,b,1),(c,d,1)\in S$，则
+\[
+(a,b,1)+(c,d,1)=(a+c,b+d,2),
+\]
+其第三个分量为 $2$，不再满足“第三分量恒为 $1$”，故 $S$ 对加法不封闭，因此不可能构成线性空间。
+
+进一步说明结构性失败：若存在零向量 $(0,0,0)$，则应属于 $S$，但其第三分量为 $0\neq 1$，故 $S$ 不含零向量。
+
+此外，加法逆也不封闭：对 $(a,b,1)\in S$，其逆元为 $(-a,-b,-1)$，第三分量为 $-1$，同样不在 $S$ 中。
+
+综上，$S$ 既不含零向量，又不满足加法封闭性与逆元封闭性，因此不构成线性空间。
+\end{solution}
+
+
+\begin{solution}[函数作为向量]
+\problem{
+考虑函数空间中的三类函数：\\
+(1) 在端点 $x=0$ 与 $x=L$ 处取零值的函数；\\
+(2) 满足周期条件 $f(0)=f(L)$ 的函数；\\
+(3) 满足 $f(0)=4$ 的函数。\\
+判断上述函数集合是否构成向量空间；若不构成，指出违反向量空间公理的地方。
+}
+
+\answer
+(1) 考虑满足 $f(0)=f(L)=0$ 的函数集合。该集合构成向量空间。理由如下：零函数 $f(x)=0$ 满足边界条件，因此存在零向量；若 $f,g$ 满足 $f(0)=f(L)=0$ 与 $g(0)=g(L)=0$，则
+$(f+g)(0)=f(0)+g(0)=0$，$(f+g)(L)=0$，故加法封闭；对任意标量 $\alpha$，有
+$(\alpha f)(0)=\alpha f(0)=0$，同理 $(\alpha f)(L)=0$，因此标量乘法也封闭。加法逆 $-f$ 同样满足边界条件，因此满足向量空间所有公理。
+
+(2) 考虑满足周期条件 $f(0)=f(L)$ 的函数集合。该集合构成向量空间。零函数满足周期条件，因此零元存在；若 $f,g$ 满足 $f(0)=f(L)$ 与 $g(0)=g(L)$，则
+$(f+g)(0)=f(0)+g(0)=f(L)+g(L)=(f+g)(L)$，故加法封闭；标量乘法满足
+$(\alpha f)(0)=\alpha f(0)=\alpha f(L)=(\alpha f)(L)$，因此封闭；加法逆 $-f$ 也保持周期性，因此满足向量空间结构。
+
+(3) 考虑满足 $f(0)=4$ 的函数集合。该集合不构成向量空间。首先零函数 $f(x)=0$ 不满足条件 $f(0)=4$，因此不存在零向量；其次若 $f(0)=4$ 且 $g(0)=4$，则
+$(f+g)(0)=8$，违反封闭性；再者标量乘法也不封闭，例如 $(0\cdot f)(0)=0 \neq 4$；同时加法逆也不封闭，因为若 $f(0)=4$，则 $(-f)(0)=-4$ 不满足条件。
+
+综上，前两类函数构成向量空间，而第三类由于缺失零元及封闭性失败，不构成向量空间。
+\end{solution}
+
+\begin{solution}[2×2矩阵空间中的线性相关性]
+\problem{
+考虑 $2\times2$ 实矩阵空间中的三个元素
+\[
+|1\rangle=\begin{pmatrix}0&1\\0&0\end{pmatrix},\quad
+|2\rangle=\begin{pmatrix}1&1\\0&1\end{pmatrix},\quad
+|3\rangle=\begin{pmatrix}-2&-1\\0&-2\end{pmatrix}.
+\]
+判断它们是否线性无关，并说明理由。
+}
+
+\answer
+考虑线性组合 $a|1\rangle+b|2\rangle$，有
+\[
+a|1\rangle+b|2\rangle
+=
+a\begin{pmatrix}0&1\\0&0\end{pmatrix}
++b\begin{pmatrix}1&1\\0&1\end{pmatrix}
+=
+\begin{pmatrix}b & a+b\\ 0 & b\end{pmatrix}.
+\]
+若其等于 $|3\rangle$，则对应分量满足
+\[
+b=-2,\quad a+b=-1.
+\]
+解得 $b=-2,\ a=1$，且一致满足矩阵各分量条件，因此
+\[
+|3\rangle = |1\rangle - 2|2\rangle.
+\]
+说明 $|3\rangle$ 可由 $|1\rangle,|2\rangle$ 线性表示，因此三者线性相关，不线性无关。
+\end{solution}
+
+\begin{solution}[向量线性相关与反例对比]
+\problem{
+证明向量 $(1,1,0),(1,0,1),(3,2,1)$ 线性相关，并证明 $(1,1,0),(1,0,1),(0,1,1)$ 的结论相反（线性无关）。
+}
+
+\answer
+(1) 先证明 $(1,1,0),(1,0,1),(3,2,1)$ 线性相关。直接验证存在非平凡线性组合：
+\[
+2(1,1,0)+(1,0,1)-(3,2,1)=(0,0,0).
+\]
+因此存在不全为零的系数使线性组合为零向量，故三向量线性相关。
+
+(2) 再证明 $(1,1,0),(1,0,1),(0,1,1)$ 线性无关。设
+\[
+a(1,1,0)+b(1,0,1)+c(0,1,1)=(0,0,0),
+\]
+对应分量得到方程组
+\[
+a+b=0,\quad a+c=0,\quad b+c=0.
+\]
+由前两式得 $a=-b,\ a=-c$，因此 $b=c$，代入第三式得 $2b=0$，从而
+\[
+a=b=c=0.
+\]
+只有零解成立，因此该组三个向量线性无关。
+
+综上，两组向量分别体现线性相关与线性无关的不同结构。
+\end{solution}

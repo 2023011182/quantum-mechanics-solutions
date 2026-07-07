@@ -1,12 +1,98 @@
 ﻿% !TeX root = ../../main.tex
 \section{子空间}
 
-% Write this section's exercise solutions here.
-% Exercise numbers are reset by section, for example 7.3.1.
-% Template:
-% \begin{solution}[short title or source exercise number]
-% \problem{Paste or summarize the problem here.}
-% \answer
-% Write the solution here.
-% \end{solution}
+\begin{solution}[正交子空间（Orthogonal Subspace）]
+\problem{在 $V^n$ 中，证明与任意非零向量 $|V\rangle\neq 0$ 正交的所有向量集合
+\[
+\{\,|V^\perp\rangle \mid \langle V|V^\perp\rangle=0\,\}
+\]
+构成 $V^{n-1}$ 的一个子空间。}
 
+\answer
+记集合
+\[
+S=\{\,|x\rangle\in V^n \mid \langle V|x\rangle=0\,\}.
+\]
+
+\textbf{第一步：验证子空间性质}
+
+(1) \textit{非空性}：显然 $|0\rangle\in S$，因为 $\langle V|0\rangle=0$。
+
+(2) \textit{加法封闭性}：若 $|x\rangle,|y\rangle\in S$，则
+\[
+\langle V| (x+y)\rangle=\langle V|x\rangle+\langle V|y\rangle=0,
+\]
+故 $|x+y\rangle\in S$。
+
+(3) \textit{数乘封闭性}：若 $|x\rangle\in S$，$\alpha\in \mathbb{F}$，则
+\[
+\langle V|\alpha x\rangle=\alpha \langle V|x\rangle=0,
+\]
+故 $\alpha|x\rangle\in S$。
+
+因此 $S$ 为 $V^n$ 的子空间。
+
+\textbf{第二步：证明维数为 $n-1$}
+
+定义线性泛函
+\[
+f:V^n\to \mathbb{F},\quad f(|x\rangle)=\langle V|x\rangle.
+\]
+由于 $|V\rangle\neq 0$，该泛函不恒为零，因此 $\operatorname{rank}(f)=1$。
+
+由秩-零化度定理（rank-nullity theorem）：
+\[
+\dim V^n = \dim \ker f + \operatorname{rank}(f),
+\]
+即
+\[
+n = \dim S + 1,
+\]
+因此
+\[
+\dim S = n-1.
+\]
+
+\textbf{结论：}
+与任意非零向量 $|V\rangle$ 正交的向量集合构成 $V^n$ 的一个 $(n-1)$ 维子空间，即超平面 $V^{n-1}$。
+\end{solution}
+
+
+\begin{solution}[正交子空间直和的维数公式]
+\problem{设 $V_1^{n_1}$ 与 $V_2^{n_2}$ 为两个子空间，且满足：$V_1$ 中任意向量都与 $V_2$ 中任意向量正交。证明 $\dim(V_1\oplus V_2)=n_1+n_2$。（提示：定理4：空间维数等于最大线性无关向量个数）}
+
+\answer
+由条件知：对任意 $|x\rangle\in V_1$ 与 $|y\rangle\in V_2$，有 $\langle x|y\rangle=0$。
+
+\textbf{第一步：证明交集仅含零向量}
+
+若 $|z\rangle\in V_1\cap V_2$，则 $|z\rangle\in V_1$ 且 $|z\rangle\in V_2$。由正交性，
+\[
+\langle z|z\rangle=0.
+\]
+由内积正定性推出 $|z\rangle=0$，因此
+\[
+V_1\cap V_2=\{0\}.
+\]
+
+\textbf{第二步：证明为直和}
+
+由于交集仅为零向量，故 $V_1+V_2$ 为直和，即
+\[
+V_1\oplus V_2=V_1+V_2.
+\]
+
+\textbf{第三步：维数计算}
+
+利用维数公式（或定理4的推论）：
+\[
+\dim(V_1+V_2)=\dim V_1+\dim V_2-\dim(V_1\cap V_2).
+\]
+代入 $\dim V_1=n_1$，$\dim V_2=n_2$，以及 $\dim(V_1\cap V_2)=0$，得
+\[
+\dim(V_1\oplus V_2)=n_1+n_2.
+\]
+
+\textbf{结论：}
+两个互相正交的子空间的直和，其维数等于各自维数之和。
+\end{solution}

@@ -1,12 +1,377 @@
 ﻿% !TeX root = ../../main.tex
 \section{对称性及其推论}
 
-% Write this section's exercise solutions here.
-% Exercise numbers are reset by section, for example 7.3.1.
-% Template:
-% \begin{solution}[short title or source exercise number]
-% \problem{Paste or summarize the problem here.}
-% \answer
-% Write the solution here.
-% \end{solution}
+\begin{solution}[无穷小平移]
+\problem{证明总动量 $p=p_1+p_2$ 是两粒子系统无穷小平移的生成元。}
+\answer
+设两粒子系统的正则坐标和正则动量分别为 $(q_1,p_1)$ 与 $(q_2,p_2)$，满足基本泊松括号关系 $\{q_i,p_j\}=\delta_{ij}$，$\{q_i,q_j\}=0$，$\{p_i,p_j\}=0$。若某个函数 $G$ 是无穷小正则变换的生成元，则在无穷小参数 $\epsilon$ 下，任意相空间函数 $F$ 的变化为 $\delta F=\epsilon\{F,G\}$。现在取总动量
+\[
+G=p=p_1+p_2.
+\]
+对第一个粒子的坐标，有
+\[
+\delta q_1=\epsilon\{q_1,p_1+p_2\}=\epsilon\{q_1,p_1\}+\epsilon\{q_1,p_2\}=\epsilon,
+\]
+因此 $q_1'=q_1+\epsilon$。同理，对第二个粒子的坐标，
+\[
+\delta q_2=\epsilon\{q_2,p_1+p_2\}=\epsilon\{q_2,p_1\}+\epsilon\{q_2,p_2\}=\epsilon,
+\]
+因此 $q_2'=q_2+\epsilon$。这说明两个粒子的坐标都沿同一方向平移了相同的无穷小距离 $\epsilon$。再看动量的变化：
+\[
+\delta p_1=\epsilon\{p_1,p_1+p_2\}=0,\qquad \delta p_2=\epsilon\{p_2,p_1+p_2\}=0.
+\]
+所以 $p_1'=p_1$，$p_2'=p_2$，即该变换只改变两个粒子的位置，而不改变它们的动量。于是由 $p=p_1+p_2$ 生成的无穷小变换为
+\[
+q_1'=q_1+\epsilon,\qquad q_2'=q_2+\epsilon,\qquad p_1'=p_1,\qquad p_2'=p_2.
+\]
+这正是两粒子系统整体作无穷小平移的形式，因此总动量 $p=p_1+p_2$ 是两粒子系统无穷小平移的生成元。
+\end{solution}
 
+\begin{solution}[无穷小变换与正则变换]
+\problem{证明由任一动力学变量 $g$ 生成的无穷小变换都是正则变换。（提示：像往常一样，保留到 $\epsilon$ 的第一阶。）}
+\answer
+设系统只有一对正则变量 $(q,p)$，动力学变量 $g=g(q,p)$ 作为无穷小变换的生成元。由生成元给出的无穷小变换为
+\[
+\bar q=q+\epsilon \frac{\partial g}{\partial p},\qquad 
+\bar p=p-\epsilon \frac{\partial g}{\partial q},
+\]
+其中只保留到 $\epsilon$ 的一阶。要证明该变换是正则变换，只需证明变换后的变量仍满足正则泊松括号关系，即 $\{\bar q,\bar p\}=1$，并且计算中忽略 $\epsilon^2$ 及更高阶项。由泊松括号定义，
+\[
+\{\bar q,\bar p\}=\frac{\partial \bar q}{\partial q}\frac{\partial \bar p}{\partial p}-\frac{\partial \bar q}{\partial p}\frac{\partial \bar p}{\partial q}.
+\]
+分别计算各偏导数：
+\[
+\frac{\partial \bar q}{\partial q}=1+\epsilon\frac{\partial^2 g}{\partial q\partial p},\qquad 
+\frac{\partial \bar q}{\partial p}=\epsilon\frac{\partial^2 g}{\partial p^2},
+\]
+\[
+\frac{\partial \bar p}{\partial p}=1-\epsilon\frac{\partial^2 g}{\partial p\partial q},\qquad 
+\frac{\partial \bar p}{\partial q}=-\epsilon\frac{\partial^2 g}{\partial q^2}.
+\]
+代入泊松括号，有
+\[
+\{\bar q,\bar p\}
+=\left(1+\epsilon\frac{\partial^2 g}{\partial q\partial p}\right)
+\left(1-\epsilon\frac{\partial^2 g}{\partial p\partial q}\right)
+-\left(\epsilon\frac{\partial^2 g}{\partial p^2}\right)
+\left(-\epsilon\frac{\partial^2 g}{\partial q^2}\right).
+\]
+展开并保留到 $\epsilon$ 的第一阶，得到
+\[
+\{\bar q,\bar p\}=1+\epsilon\frac{\partial^2 g}{\partial q\partial p}-\epsilon\frac{\partial^2 g}{\partial p\partial q}+O(\epsilon^2).
+\]
+若 $g$ 足够光滑，则混合偏导数相等，即
+\[
+\frac{\partial^2 g}{\partial q\partial p}=\frac{\partial^2 g}{\partial p\partial q}.
+\]
+因此
+\[
+\{\bar q,\bar p\}=1+O(\epsilon^2).
+\]
+在无穷小变换的一阶近似下，$O(\epsilon^2)$ 项被忽略，所以 $\{\bar q,\bar p\}=1$。这说明变换后的变量仍然满足正则泊松括号关系，因此由任一动力学变量 $g$ 生成的无穷小变换都是正则变换。
+\end{solution}
+
+\begin{solution}[非正则变换]
+\problem{考虑
+\[
+\mathcal H=\frac{p_x^2+p_y^2}{2m}+\frac{1}{2}m\omega^2(x^2+y^2),
+\]
+其在坐标和动量的转动下的不变性导致 $l_z$ 守恒。但是 $\mathcal H$ 仅仅在坐标的转动下也是不变的。证明这是一个非正则变换。相信在这种情况下对于任何的 $g$，都不可能把 $\delta\mathcal H$ 写成 $\epsilon\{\mathcal H,g\}$，即得不到守恒定律。}
+\answer
+只转动坐标而不转动动量，即令
+\[
+\bar x=x\cos\theta-y\sin\theta,\qquad \bar y=x\sin\theta+y\cos\theta,\qquad \bar p_x=p_x,\qquad \bar p_y=p_y.
+\]
+这个变换确实保持哈密顿量的形式不变。因为动量部分显然不变，而坐标部分满足
+\[
+\bar x^2+\bar y^2=(x\cos\theta-y\sin\theta)^2+(x\sin\theta+y\cos\theta)^2=x^2+y^2,
+\]
+所以 $\mathcal H$ 在这个“只转动坐标”的变换下不变。但是哈密顿量不变并不自动说明该变换是正则变换；正则变换还要求新的变量保持基本泊松括号关系。下面直接计算变换后变量的泊松括号。由泊松括号定义
+\[
+\{A,B\}=\frac{\partial A}{\partial x}\frac{\partial B}{\partial p_x}+\frac{\partial A}{\partial y}\frac{\partial B}{\partial p_y}-\frac{\partial A}{\partial p_x}\frac{\partial B}{\partial x}-\frac{\partial A}{\partial p_y}\frac{\partial B}{\partial y},
+\]
+可得
+\[
+\{\bar x,\bar p_x\}=\frac{\partial \bar x}{\partial x}=\cos\theta,\qquad
+\{\bar y,\bar p_y\}=\frac{\partial \bar y}{\partial y}=\cos\theta,
+\]
+并且
+\[
+\{\bar x,\bar p_y\}=\frac{\partial \bar x}{\partial y}=-\sin\theta,\qquad
+\{\bar y,\bar p_x\}=\frac{\partial \bar y}{\partial x}=\sin\theta.
+\]
+若该变换是正则变换，则应满足 $\{\bar x,\bar p_x\}=1$、$\{\bar y,\bar p_y\}=1$、$\{\bar x,\bar p_y\}=0$、$\{\bar y,\bar p_x\}=0$。但上式表明，当 $\theta\neq 0$ 时这些条件一般不成立，因此这个只转动坐标而保持动量不变的变换不是正则变换。
+
+也可以从无穷小形式进一步看出它不可能由某个动力学变量 $g$ 作为正则生成元生成。令 $\theta=\epsilon$，保留到 $\epsilon$ 的一阶，则
+\[
+\delta x=-\epsilon y,\qquad \delta y=\epsilon x,\qquad \delta p_x=0,\qquad \delta p_y=0.
+\]
+若存在某个 $g(x,y,p_x,p_y)$ 生成这个无穷小变换，则应有
+\[
+\delta x=\epsilon\{x,g\}=\epsilon\frac{\partial g}{\partial p_x},\qquad
+\delta y=\epsilon\{y,g\}=\epsilon\frac{\partial g}{\partial p_y},
+\]
+以及
+\[
+\delta p_x=\epsilon\{p_x,g\}=-\epsilon\frac{\partial g}{\partial x},\qquad
+\delta p_y=\epsilon\{p_y,g\}=-\epsilon\frac{\partial g}{\partial y}.
+\]
+于是必须同时满足
+\[
+\frac{\partial g}{\partial p_x}=-y,\qquad \frac{\partial g}{\partial p_y}=x,\qquad \frac{\partial g}{\partial x}=0,\qquad \frac{\partial g}{\partial y}=0.
+\]
+后两个条件说明 $g$ 不能依赖于 $x,y$，但前两个条件又要求 $g$ 对 $p_x,p_y$ 的偏导数分别含有 $y,x$，这与 $g$ 不依赖于 $x,y$ 矛盾。因此不存在这样的动力学变量 $g$ 能生成这个变换。另一方面，哈密顿量在该变换下的一阶变化为
+\[
+\delta\mathcal H=m\omega^2(x\,\delta x+y\,\delta y)=m\omega^2\bigl(x(-\epsilon y)+y(\epsilon x)\bigr)=0.
+\]
+虽然 $\delta\mathcal H=0$，但这个不变性来自一个非正则变换，而不是由某个相空间函数 $g$ 生成的正则无穷小变换。因此它不能按照通常的正则变换形式给出 $\delta\mathcal H=\epsilon\{\mathcal H,g\}$ 并推出某个守恒量；也就是说，从这种“仅转动坐标”的不变性得不到守恒定律。
+\end{solution}
+
+
+\begin{solution}[相空间中的无穷小转动生成元]
+\problem{考虑 $\mathcal H=\frac{1}{2}p^2+\frac{1}{2}x^2$，它在相空间 $(x-p\text{ 平面})$ 中的无穷小转动下是不变的。求该变换的生成元（在证明其为正则变换之后）。（基于习题 2.5.2，你或许能猜出这个答案。）}
+\answer
+相空间中的无穷小转动可以写为
+\[
+\bar x=x+\epsilon p,\qquad \bar p=p-\epsilon x,
+\]
+其中 $\epsilon$ 是无穷小参数，且只保留到 $\epsilon$ 的第一阶。先验证这是正则变换。由泊松括号定义 $\{A,B\}=\frac{\partial A}{\partial x}\frac{\partial B}{\partial p}-\frac{\partial A}{\partial p}\frac{\partial B}{\partial x}$，有
+\[
+\{\bar x,\bar p\}=\frac{\partial \bar x}{\partial x}\frac{\partial \bar p}{\partial p}-\frac{\partial \bar x}{\partial p}\frac{\partial \bar p}{\partial x}=1\cdot 1-\epsilon(-\epsilon)=1+\epsilon^2.
+\]
+在无穷小变换中保留到 $\epsilon$ 的第一阶，忽略 $O(\epsilon^2)$，于是 $\{\bar x,\bar p\}=1$，所以该无穷小变换是正则变换。也可从有限转动 $\bar x=x\cos\epsilon+p\sin\epsilon,\ \bar p=p\cos\epsilon-x\sin\epsilon$ 看出其雅可比矩阵为旋转矩阵，因而严格保持泊松括号；这里的一阶形式正是它的无穷小近似。
+
+现在求生成元。若 $g(x,p)$ 是该无穷小正则变换的生成元，则按约定有
+\[
+\delta x=\epsilon\{x,g\}=\epsilon\frac{\partial g}{\partial p},\qquad 
+\delta p=\epsilon\{p,g\}=-\epsilon\frac{\partial g}{\partial x}.
+\]
+而由相空间无穷小转动可知 $\delta x=\bar x-x=\epsilon p$，$\delta p=\bar p-p=-\epsilon x$，因此生成元必须满足
+\[
+\frac{\partial g}{\partial p}=p,\qquad \frac{\partial g}{\partial x}=x.
+\]
+由第一式对 $p$ 积分，得 $g=\frac{1}{2}p^2+f(x)$；再由第二式得到 $f'(x)=x$，所以 $f(x)=\frac{1}{2}x^2+C$。生成元中相加常数不影响泊松括号，故可取
+\[
+g=\frac{1}{2}(p^2+x^2).
+\]
+最后验证哈密顿量在此变换下确实不变。因为本题中 $\mathcal H=\frac{1}{2}(p^2+x^2)$，所以 $g=\mathcal H$，于是
+\[
+\delta\mathcal H=\epsilon\{\mathcal H,g\}=\epsilon\{\mathcal H,\mathcal H\}=0.
+\]
+因此相空间 $(x-p)$ 平面中无穷小转动的生成元为
+\[
+g=\frac{1}{2}(p^2+x^2),
+\]
+也就是该简谐振子的哈密顿量本身。
+\end{solution}
+
+
+\begin{solution}[非正则变换]
+\problem{为什么保持 $\mathcal H$ 不变的非正则变换不能将一个解映射到另一个解？或者鉴于对结果 II 的讨论，为什么当保持 $\mathcal H$ 不变的不是正则变换时，一个实验和它的变换后版本不能给出相同的结果？最好考虑一个例子。考虑习题 2.8.3 中给出的势。假设我在 $(x=a,y=0)$ 和 $(p_x=b,p_y=0)$ 处释放一个粒子，而你在变换后的状态下释放一个粒子，其中 $(x=0,y=a)$ 和 $(p_x=b,p_y=0)$，即你转动坐标，而不转动动量。这是一个非正则变换，它保持 $\mathcal H$ 不变。让自己相信，在以后的时间里，这两个粒子的状态并不是通过相同的变换关联起来的。试着了解在这个一般情况下出了什么问题。}
+\answer
+习题 2.8.3 中的哈密顿量为
+\[
+\mathcal H=\frac{p_x^2+p_y^2}{2m}+\frac{1}{2}m\omega^2(x^2+y^2).
+\]
+它在“只转动坐标、不转动动量”的变换下不变。例如取转角为 $\pi/2$，则初态
+\[
+(x,y,p_x,p_y)=(a,0,b,0)
+\]
+被变为
+\[
+(x,y,p_x,p_y)=(0,a,b,0).
+\]
+这两个初态的哈密顿量相同，因为两者都有相同的动能 $\frac{b^2}{2m}$ 和相同的势能 $\frac{1}{2}m\omega^2a^2$。但是哈密顿量数值相同并不意味着两条运动轨道会通过同一个变换相互关联。真正能把解映射为解的变换必须保持哈密顿方程的结构，也就是必须是正则变换；单纯保持 $\mathcal H$ 的函数形式或数值不变是不够的。
+
+先看这个具体例子。哈密顿方程为
+\[
+\dot x=\frac{p_x}{m},\qquad \dot y=\frac{p_y}{m},\qquad \dot p_x=-m\omega^2x,\qquad \dot p_y=-m\omega^2y.
+\]
+对第一个粒子，初态为 $(x(0),y(0),p_x(0),p_y(0))=(a,0,b,0)$，所以其运动为
+\[
+x_1(t)=a\cos\omega t+\frac{b}{m\omega}\sin\omega t,\qquad y_1(t)=0,
+\]
+\[
+p_{x1}(t)=b\cos\omega t-m\omega a\sin\omega t,\qquad p_{y1}(t)=0.
+\]
+如果在任意时刻都对第一个粒子的状态施加同一个“只转动坐标 $\pi/2$、不转动动量”的变换，就会得到
+\[
+\widetilde x_1(t)=0,\qquad \widetilde y_1(t)=a\cos\omega t+\frac{b}{m\omega}\sin\omega t,\qquad \widetilde p_{x1}(t)=b\cos\omega t-m\omega a\sin\omega t,\qquad \widetilde p_{y1}(t)=0.
+\]
+而第二个粒子的初态是 $(0,a,b,0)$，由哈密顿方程得到
+\[
+x_2(t)=\frac{b}{m\omega}\sin\omega t,\qquad y_2(t)=a\cos\omega t,
+\]
+\[
+p_{x2}(t)=b\cos\omega t,\qquad p_{y2}(t)=-m\omega a\sin\omega t.
+\]
+显然一般有
+\[
+(x_2(t),y_2(t),p_{x2}(t),p_{y2}(t))\neq(\widetilde x_1(t),\widetilde y_1(t),\widetilde p_{x1}(t),\widetilde p_{y1}(t)).
+\]
+例如 $\widetilde x_1(t)=0$，但 $x_2(t)=\frac{b}{m\omega}\sin\omega t$ 一般不为零；又如 $\widetilde p_{y1}(t)=0$，但 $p_{y2}(t)=-m\omega a\sin\omega t$ 一般不为零。因此，这两个粒子的后续状态并不是由同一个只转动坐标的变换联系起来的。
+
+问题的根源在于，这个变换不是正则变换。只转动坐标而不转动动量时，例如有限转动
+\[
+\bar x=x\cos\theta-y\sin\theta,\qquad \bar y=x\sin\theta+y\cos\theta,\qquad \bar p_x=p_x,\qquad \bar p_y=p_y,
+\]
+会给出
+\[
+\{\bar x,\bar p_x\}=\cos\theta,\qquad \{\bar y,\bar p_y\}=\cos\theta,\qquad \{\bar x,\bar p_y\}=-\sin\theta,\qquad \{\bar y,\bar p_x\}=\sin\theta.
+\]
+这些并不满足正则变量所需的基本泊松括号关系 $\{\bar q_i,\bar p_j\}=\delta_{ij}$，因此它不保持相空间的辛结构，也就不保持哈密顿方程的形式。换言之，哈密顿方程不仅依赖于哈密顿量函数 $\mathcal H$，还依赖于相空间中的正则结构，即哪些变量与哪些变量互为共轭。非正则变换虽然可能使 $\mathcal H$ 的表达式或数值不变，却会破坏这种共轭关系。
+
+正则变换的关键性质是：若 $(q(t),p(t))$ 是哈密顿方程的解，则经过正则变换得到的 $(Q(t),P(t))$ 仍满足同一形式的哈密顿方程，因此它把解映射为解。非正则变换缺少这一性质。所以在本题中，保持 $\mathcal H$ 不变的“只转动坐标”变换并不对应真正的动力学对称性，不能推出守恒量，也不能保证一个实验与其变换后的版本给出相同的后续运动。
+\end{solution}
+
+
+\begin{solution}[经典路径的作用量]
+\problem{证明 $\partial S_{\mathrm{cl}}/\partial x_f=p(t_f)$。}
+\answer
+经典作用量定义为
+\[
+S_{\mathrm{cl}}(x_f,t_f;x_i,t_i)=\int_{t_i}^{t_f}L(x_{\mathrm{cl}},\dot x_{\mathrm{cl}},t)\,dt,
+\]
+其中 $x_{\mathrm{cl}}(t)$ 是连接给定端点 $(x_i,t_i)$ 与 $(x_f,t_f)$ 的经典路径。现在固定 $x_i,t_i,t_f$，只改变末端位置 $x_f$。设末端位置发生无穷小变化 $x_f\to x_f+\delta x_f$，相应的经典路径变为
+\[
+x_{\mathrm{cl}}(t)\to x_{\mathrm{cl}}(t)+\eta(t).
+\]
+由于初端位置固定而末端位置改变，所以
+\[
+\eta(t_i)=0,\qquad \eta(t_f)=\delta x_f.
+\]
+经典作用量的一阶变化为
+\[
+\delta S_{\mathrm{cl}}
+=\int_{t_i}^{t_f}\left(\frac{\partial L}{\partial x}\eta+\frac{\partial L}{\partial \dot x}\dot\eta\right)dt.
+\]
+对第二项作分部积分，得到
+\[
+\delta S_{\mathrm{cl}}
+=\int_{t_i}^{t_f}\left[\frac{\partial L}{\partial x}-\frac{d}{dt}\left(\frac{\partial L}{\partial \dot x}\right)\right]\eta\,dt
++\left[\frac{\partial L}{\partial \dot x}\eta\right]_{t_i}^{t_f}.
+\]
+因为 $x_{\mathrm{cl}}(t)$ 是经典路径，它满足欧拉--拉格朗日方程
+\[
+\frac{\partial L}{\partial x}-\frac{d}{dt}\left(\frac{\partial L}{\partial \dot x}\right)=0,
+\]
+所以上式中的积分项消失，只剩边界项：
+\[
+\delta S_{\mathrm{cl}}=\left[\frac{\partial L}{\partial \dot x}\eta\right]_{t_i}^{t_f}.
+\]
+又由于 $\eta(t_i)=0$，$\eta(t_f)=\delta x_f$，因此
+\[
+\delta S_{\mathrm{cl}}
+=\frac{\partial L}{\partial \dot x}(t_f)\,\delta x_f.
+\]
+由正则动量的定义
+\[
+p=\frac{\partial L}{\partial \dot x},
+\]
+可得
+\[
+\delta S_{\mathrm{cl}}=p(t_f)\,\delta x_f.
+\]
+另一方面，在固定 $t_i,t_f,x_i$ 而只改变 $x_f$ 时，
+\[
+\delta S_{\mathrm{cl}}=\frac{\partial S_{\mathrm{cl}}}{\partial x_f}\delta x_f.
+\]
+比较两式，得到
+\[
+\frac{\partial S_{\mathrm{cl}}}{\partial x_f}=p(t_f).
+\]
+这表明经典作用量对末端坐标的偏导数等于经典路径在末端时刻的正则动量。
+\end{solution}
+
+
+
+\begin{solution}[简谐振子，经典路径]
+\problem{考虑谐振子，它的通解为
+\[
+x(t)=A\cos\omega t+B\sin\omega t.
+\]
+用 $A$ 和 $B$ 表示能量，注意它不依赖于时间。现在这样选择 $A$ 和 $B$，使 $x(0)=x_1$ 和 $x(T)=x_2$。用 $x_1$、$x_2$ 和 $T$ 写下能量。证明连接 $x_1$ 和 $x_2$ 的轨迹的作用量是
+\[
+S_{\mathrm{cl}}(x_1,x_2,T)=\frac{m\omega}{2\sin\omega T}\bigl[(x_1^2+x_2^2)\cos\omega T-2x_1x_2\bigr].
+\]
+证明 $\partial S_{\mathrm{cl}}/\partial T=-E$。}
+\answer
+简谐振子的拉格朗日量和能量分别为
+\[
+L=\frac{1}{2}m\dot x^2-\frac{1}{2}m\omega^2x^2,\qquad E=\frac{1}{2}m\dot x^2+\frac{1}{2}m\omega^2x^2.
+\]
+由通解 $x(t)=A\cos\omega t+B\sin\omega t$，有
+\[
+\dot x(t)=-A\omega\sin\omega t+B\omega\cos\omega t.
+\]
+代入能量表达式，得到
+\[
+E=\frac{1}{2}m\omega^2(-A\sin\omega t+B\cos\omega t)^2+\frac{1}{2}m\omega^2(A\cos\omega t+B\sin\omega t)^2
+=\frac{1}{2}m\omega^2(A^2+B^2),
+\]
+其中交叉项相消，且 $\sin^2\omega t+\cos^2\omega t=1$，因此能量不依赖于时间。现在令 $x(0)=x_1$，则 $A=x_1$；再由 $x(T)=x_2$ 得
+\[
+x_2=x_1\cos\omega T+B\sin\omega T,
+\]
+所以
+\[
+B=\frac{x_2-x_1\cos\omega T}{\sin\omega T}.
+\]
+因此能量可写成
+\[
+E=\frac{1}{2}m\omega^2\left[x_1^2+\left(\frac{x_2-x_1\cos\omega T}{\sin\omega T}\right)^2\right].
+\]
+整理为
+\[
+E=\frac{m\omega^2}{2\sin^2\omega T}\left(x_1^2+x_2^2-2x_1x_2\cos\omega T\right).
+\]
+下面计算经典作用量。沿经典路径，
+\[
+S_{\mathrm{cl}}=\int_0^T\left(\frac{1}{2}m\dot x^2-\frac{1}{2}m\omega^2x^2\right)dt.
+\]
+将 $x(t)=A\cos\omega t+B\sin\omega t$ 和 $\dot x(t)=-A\omega\sin\omega t+B\omega\cos\omega t$ 代入，得
+\[
+L=\frac{1}{2}m\omega^2\left[(-A\sin\omega t+B\cos\omega t)^2-(A\cos\omega t+B\sin\omega t)^2\right].
+\]
+展开并用三角恒等式化简：
+\[
+L=\frac{1}{2}m\omega^2\left[-A^2\cos 2\omega t+B^2\cos 2\omega t-2AB\sin 2\omega t\right].
+\]
+于是
+\[
+S_{\mathrm{cl}}
+=\frac{1}{2}m\omega^2\int_0^T\left[(B^2-A^2)\cos 2\omega t-2AB\sin 2\omega t\right]dt.
+\]
+积分得到
+\[
+S_{\mathrm{cl}}
+=\frac{m\omega}{4}(B^2-A^2)\sin 2\omega T+\frac{m\omega}{2}AB(\cos 2\omega T-1).
+\]
+将 $A=x_1$、$B=(x_2-x_1\cos\omega T)/\sin\omega T$ 代入，并利用 $\sin 2\omega T=2\sin\omega T\cos\omega T$、$\cos 2\omega T-1=-2\sin^2\omega T$，化简可得
+\[
+S_{\mathrm{cl}}(x_1,x_2,T)=\frac{m\omega}{2\sin\omega T}\bigl[(x_1^2+x_2^2)\cos\omega T-2x_1x_2\bigr].
+\]
+最后验证 $\partial S_{\mathrm{cl}}/\partial T=-E$。令 $\theta=\omega T$，则
+\[
+S_{\mathrm{cl}}=\frac{m\omega}{2}\frac{(x_1^2+x_2^2)\cos\theta-2x_1x_2}{\sin\theta}.
+\]
+对 $T$ 求偏导，注意 $x_1,x_2$ 固定且 $d\theta/dT=\omega$，得到
+\[
+\frac{\partial S_{\mathrm{cl}}}{\partial T}
+=\frac{m\omega^2}{2}\frac{-(x_1^2+x_2^2)\sin^2\theta-\bigl[(x_1^2+x_2^2)\cos\theta-2x_1x_2\bigr]\cos\theta}{\sin^2\theta}.
+\]
+整理分子：
+\[
+-(x_1^2+x_2^2)(\sin^2\theta+\cos^2\theta)+2x_1x_2\cos\theta
+=-(x_1^2+x_2^2)+2x_1x_2\cos\theta.
+\]
+因此
+\[
+\frac{\partial S_{\mathrm{cl}}}{\partial T}
+=-\frac{m\omega^2}{2\sin^2\omega T}\left(x_1^2+x_2^2-2x_1x_2\cos\omega T\right).
+\]
+这正好等于前面得到的能量表达式的负值，所以
+\[
+\frac{\partial S_{\mathrm{cl}}}{\partial T}=-E.
+\]
+\end{solution}

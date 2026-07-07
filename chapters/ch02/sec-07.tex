@@ -1,12 +1,1355 @@
 ﻿% !TeX root = ../../main.tex
 \section{循环坐标、泊松括号和正则变换}
 
-% Write this section's exercise solutions here.
-% Exercise numbers are reset by section, for example 7.3.1.
-% Template:
-% \begin{solution}[short title or source exercise number]
-% \problem{Paste or summarize the problem here.}
-% \answer
-% Write the solution here.
-% \end{solution}
+\begin{solution}[泊松括号]
+\problem{证明
+\[
+\{\omega,\lambda\}=-\{\lambda,\omega\},
+\]
+\[
+\{\omega,\lambda+\sigma\}=\{\omega,\lambda\}+\{\omega,\sigma\},
+\]
+\[
+\{\omega,\lambda\sigma\}=\{\omega,\lambda\}\sigma+\lambda\{\omega,\sigma\}.
+\]
+请注意上述公式与对易式 \((1.5.10)\) 和 \((1.5.11)\) 式之间的相似性。}
+\answer
+设 \(\omega,\lambda,\sigma\) 都是相空间变量 \(q,p\) 的函数。为简化记号，先在单自由度情形下证明；多自由度情形只需对每一对共轭变量 \((q_i,p_i)\) 求和，结论不变。单自由度泊松括号定义为
+\[
+\{\omega,\lambda\}
+=
+\frac{\partial \omega}{\partial q}\frac{\partial \lambda}{\partial p}
+-
+\frac{\partial \omega}{\partial p}\frac{\partial \lambda}{\partial q}.
+\]
+首先证明反对称性。由定义有
+\[
+\{\lambda,\omega\}
+=
+\frac{\partial \lambda}{\partial q}\frac{\partial \omega}{\partial p}
+-
+\frac{\partial \lambda}{\partial p}\frac{\partial \omega}{\partial q}.
+\]
+因此
+\[
+-\{\lambda,\omega\}
+=
+-\frac{\partial \lambda}{\partial q}\frac{\partial \omega}{\partial p}
++
+\frac{\partial \lambda}{\partial p}\frac{\partial \omega}{\partial q}
+=
+\frac{\partial \omega}{\partial q}\frac{\partial \lambda}{\partial p}
+-
+\frac{\partial \omega}{\partial p}\frac{\partial \lambda}{\partial q}
+=
+\{\omega,\lambda\}.
+\]
+所以
+\[
+\{\omega,\lambda\}=-\{\lambda,\omega\}.
+\]
 
+其次证明对第二个变量的线性性。由定义，
+\[
+\{\omega,\lambda+\sigma\}
+=
+\frac{\partial \omega}{\partial q}\frac{\partial(\lambda+\sigma)}{\partial p}
+-
+\frac{\partial \omega}{\partial p}\frac{\partial(\lambda+\sigma)}{\partial q}.
+\]
+利用偏导数的线性性，
+\[
+\frac{\partial(\lambda+\sigma)}{\partial p}
+=
+\frac{\partial\lambda}{\partial p}
++
+\frac{\partial\sigma}{\partial p},
+\qquad
+\frac{\partial(\lambda+\sigma)}{\partial q}
+=
+\frac{\partial\lambda}{\partial q}
++
+\frac{\partial\sigma}{\partial q}.
+\]
+代入并整理可得
+\[
+\begin{aligned}
+\{\omega,\lambda+\sigma\}
+&=
+\frac{\partial \omega}{\partial q}
+\left(
+\frac{\partial\lambda}{\partial p}
++
+\frac{\partial\sigma}{\partial p}
+\right)
+-
+\frac{\partial \omega}{\partial p}
+\left(
+\frac{\partial\lambda}{\partial q}
++
+\frac{\partial\sigma}{\partial q}
+\right)\\
+&=
+\left(
+\frac{\partial \omega}{\partial q}\frac{\partial\lambda}{\partial p}
+-
+\frac{\partial \omega}{\partial p}\frac{\partial\lambda}{\partial q}
+\right)
++
+\left(
+\frac{\partial \omega}{\partial q}\frac{\partial\sigma}{\partial p}
+-
+\frac{\partial \omega}{\partial p}\frac{\partial\sigma}{\partial q}
+\right)\\
+&=
+\{\omega,\lambda\}+\{\omega,\sigma\}.
+\end{aligned}
+\]
+
+最后证明乘积法则。由定义，
+\[
+\{\omega,\lambda\sigma\}
+=
+\frac{\partial \omega}{\partial q}\frac{\partial(\lambda\sigma)}{\partial p}
+-
+\frac{\partial \omega}{\partial p}\frac{\partial(\lambda\sigma)}{\partial q}.
+\]
+利用普通偏导数的乘积法则，
+\[
+\frac{\partial(\lambda\sigma)}{\partial p}
+=
+\frac{\partial\lambda}{\partial p}\sigma
++
+\lambda\frac{\partial\sigma}{\partial p},
+\qquad
+\frac{\partial(\lambda\sigma)}{\partial q}
+=
+\frac{\partial\lambda}{\partial q}\sigma
++
+\lambda\frac{\partial\sigma}{\partial q}.
+\]
+代入泊松括号定义，得到
+\[
+\begin{aligned}
+\{\omega,\lambda\sigma\}
+&=
+\frac{\partial \omega}{\partial q}
+\left(
+\frac{\partial\lambda}{\partial p}\sigma
++
+\lambda\frac{\partial\sigma}{\partial p}
+\right)
+-
+\frac{\partial \omega}{\partial p}
+\left(
+\frac{\partial\lambda}{\partial q}\sigma
++
+\lambda\frac{\partial\sigma}{\partial q}
+\right)\\
+&=
+\left(
+\frac{\partial \omega}{\partial q}\frac{\partial\lambda}{\partial p}
+-
+\frac{\partial \omega}{\partial p}\frac{\partial\lambda}{\partial q}
+\right)\sigma
++
+\lambda
+\left(
+\frac{\partial \omega}{\partial q}\frac{\partial\sigma}{\partial p}
+-
+\frac{\partial \omega}{\partial p}\frac{\partial\sigma}{\partial q}
+\right)\\
+&=
+\{\omega,\lambda\}\sigma+\lambda\{\omega,\sigma\}.
+\end{aligned}
+\]
+因此三条恒等式均得证。它们分别表明泊松括号具有反对称性、线性性和类似导数的乘积法则，这正是其与量子力学中对易式代数性质相似的原因。
+\end{solution}
+
+\begin{solution}[正则泊松括号关系]
+\problem{(i) 证明 \((2.7.4)\) 和 \((2.7.5)\) 式。(ii) 考虑一个由 \(\mathcal H=p_x^2+p_y^2+ax^2+by^2\) 给出的二维问题。论证如果 \(a=b\)，则 \(\{l_z,\mathcal H\}\) 一定为零。用显式的计算证明。}
+\answer
+先证明正则变量的基本泊松括号关系。对 \(n\) 个自由度的系统，泊松括号定义为
+\[
+\{f,g\}=\sum_k\left(\frac{\partial f}{\partial q_k}\frac{\partial g}{\partial p_k}-\frac{\partial f}{\partial p_k}\frac{\partial g}{\partial q_k}\right).
+\]
+取 \(f=q_i,\ g=q_j\)，由于
+\[
+\frac{\partial q_i}{\partial q_k}=\delta_{ik},\qquad
+\frac{\partial q_j}{\partial p_k}=0,\qquad
+\frac{\partial q_i}{\partial p_k}=0,\qquad
+\frac{\partial q_j}{\partial q_k}=\delta_{jk},
+\]
+所以
+\[
+\{q_i,q_j\}
+=\sum_k(\delta_{ik}\cdot 0-0\cdot\delta_{jk})=0.
+\]
+同理，取 \(f=p_i,\ g=p_j\)，由于
+\[
+\frac{\partial p_i}{\partial q_k}=0,\qquad
+\frac{\partial p_j}{\partial p_k}=\delta_{jk},\qquad
+\frac{\partial p_i}{\partial p_k}=\delta_{ik},\qquad
+\frac{\partial p_j}{\partial q_k}=0,
+\]
+所以
+\[
+\{p_i,p_j\}
+=\sum_k(0\cdot\delta_{jk}-\delta_{ik}\cdot 0)=0.
+\]
+再取 \(f=q_i,\ g=p_j\)，得到
+\[
+\{q_i,p_j\}
+=
+\sum_k\left(
+\frac{\partial q_i}{\partial q_k}\frac{\partial p_j}{\partial p_k}
+-
+\frac{\partial q_i}{\partial p_k}\frac{\partial p_j}{\partial q_k}
+\right)
+=
+\sum_k(\delta_{ik}\delta_{jk}-0)
+=
+\delta_{ij}.
+\]
+因此基本正则泊松括号关系为
+\[
+\{q_i,q_j\}=0,\qquad
+\{p_i,p_j\}=0,\qquad
+\{q_i,p_j\}=\delta_{ij}.
+\]
+由反对称性还可得
+\[
+\{p_i,q_j\}=-\delta_{ij}.
+\]
+接着证明泊松括号与哈密顿正则方程的一致性。由定义，
+\[
+\{q_i,\mathcal H\}
+=
+\sum_k\left(
+\frac{\partial q_i}{\partial q_k}\frac{\partial\mathcal H}{\partial p_k}
+-
+\frac{\partial q_i}{\partial p_k}\frac{\partial\mathcal H}{\partial q_k}
+\right)
+=
+\frac{\partial \mathcal H}{\partial p_i}.
+\]
+根据哈密顿方程 \(\dot q_i=\partial\mathcal H/\partial p_i\)，可得
+\[
+\dot q_i=\{q_i,\mathcal H\}.
+\]
+类似地，
+\[
+\{p_i,\mathcal H\}
+=
+\sum_k\left(
+\frac{\partial p_i}{\partial q_k}\frac{\partial\mathcal H}{\partial p_k}
+-
+\frac{\partial p_i}{\partial p_k}\frac{\partial\mathcal H}{\partial q_k}
+\right)
+=
+-\frac{\partial \mathcal H}{\partial q_i}.
+\]
+根据哈密顿方程 \(\dot p_i=-\partial\mathcal H/\partial q_i\)，可得
+\[
+\dot p_i=\{p_i,\mathcal H\}.
+\]
+下面考虑二维哈密顿量
+\[
+\mathcal H=p_x^2+p_y^2+ax^2+by^2.
+\]
+绕 \(z\) 轴的角动量为
+\[
+l_z=xp_y-yp_x.
+\]
+如果 \(a=b\)，则哈密顿量变为
+\[
+\mathcal H=p_x^2+p_y^2+a(x^2+y^2).
+\]
+此时 \(\mathcal H\) 只依赖于 \(x^2+y^2\) 和 \(p_x^2+p_y^2\)，在 \(x\)-\(y\) 平面内具有旋转对称性。由于 \(l_z\) 是平面转动的生成元，旋转对称性意味着 \(l_z\) 守恒，因此应有
+\[
+\{l_z,\mathcal H\}=0.
+\]
+下面直接计算验证。按二维泊松括号定义，
+\[
+\{l_z,\mathcal H\}
+=
+\frac{\partial l_z}{\partial x}\frac{\partial\mathcal H}{\partial p_x}
++
+\frac{\partial l_z}{\partial y}\frac{\partial\mathcal H}{\partial p_y}
+-
+\frac{\partial l_z}{\partial p_x}\frac{\partial\mathcal H}{\partial x}
+-
+\frac{\partial l_z}{\partial p_y}\frac{\partial\mathcal H}{\partial y}.
+\]
+由
+\[
+\frac{\partial l_z}{\partial x}=p_y,\qquad
+\frac{\partial l_z}{\partial y}=-p_x,\qquad
+\frac{\partial l_z}{\partial p_x}=-y,\qquad
+\frac{\partial l_z}{\partial p_y}=x,
+\]
+以及
+\[
+\frac{\partial\mathcal H}{\partial p_x}=2p_x,\qquad
+\frac{\partial\mathcal H}{\partial p_y}=2p_y,\qquad
+\frac{\partial\mathcal H}{\partial x}=2ax,\qquad
+\frac{\partial\mathcal H}{\partial y}=2by,
+\]
+可得
+\[
+\begin{aligned}
+\{l_z,\mathcal H\}
+&=
+p_y(2p_x)+(-p_x)(2p_y)-(-y)(2ax)-x(2by)\\
+&=
+2p_xp_y-2p_xp_y+2axy-2bxy\\
+&=
+2(a-b)xy.
+\end{aligned}
+\]
+因此当 \(a=b\) 时，
+\[
+\{l_z,\mathcal H\}=0.
+\]
+这说明在各向同性情形 \(a=b\) 下，系统具有绕 \(z\) 轴的旋转对称性，与该对称性对应的守恒量正是 \(l_z\)。
+\end{solution}
+
+
+\begin{solution}[正则泊松括号证明]
+\problem{填补由 \((2.7.14)\) 式导出 \((2.7.18)\) 式所丢失的步骤。}
+\answer
+设 \((q_i,p_i)\) 是原来的正则坐标和正则动量，\((\bar q_i,\bar p_i)\) 是经过正则变换后得到的新变量。泊松括号在原变量下定义为
+\[
+\{f,g\}
+=
+\sum_i
+\left(
+\frac{\partial f}{\partial q_i}\frac{\partial g}{\partial p_i}
+-
+\frac{\partial f}{\partial p_i}\frac{\partial g}{\partial q_i}
+\right).
+\]
+由 \((2.7.14)\) 式可知，新坐标 \(\bar q_j\) 的时间演化可写为
+\[
+\dot{\bar q}_j
+=
+\sum_i
+\left(
+\frac{\partial \bar q_j}{\partial q_i}\frac{\partial \mathcal H}{\partial p_i}
+-
+\frac{\partial \bar q_j}{\partial p_i}\frac{\partial \mathcal H}{\partial q_i}
+\right).
+\]
+根据泊松括号定义，右边正是
+\[
+\dot{\bar q}_j=\{\bar q_j,\mathcal H\}.
+\]
+另一方面，将哈密顿量看成新变量的函数
+\[
+\mathcal H=\mathcal H(\bar q_1,\cdots,\bar q_n;\bar p_1,\cdots,\bar p_n),
+\]
+则由泊松括号的链式法则可得
+\[
+\{\bar q_j,\mathcal H\}
+=
+\sum_k
+\left(
+\frac{\partial \mathcal H}{\partial \bar q_k}
+\{\bar q_j,\bar q_k\}
++
+\frac{\partial \mathcal H}{\partial \bar p_k}
+\{\bar q_j,\bar p_k\}
+\right).
+\]
+如果变换后仍满足哈密顿正则方程，则必须有
+\[
+\dot{\bar q}_j=\frac{\partial \mathcal H}{\partial \bar p_j}.
+\]
+因此
+\[
+\sum_k
+\left(
+\frac{\partial \mathcal H}{\partial \bar q_k}
+\{\bar q_j,\bar q_k\}
++
+\frac{\partial \mathcal H}{\partial \bar p_k}
+\{\bar q_j,\bar p_k\}
+\right)
+=
+\frac{\partial \mathcal H}{\partial \bar p_j}.
+\]
+由于这个等式应对任意哈密顿量 \(\mathcal H\) 成立，\(\partial \mathcal H/\partial \bar q_k\) 和 \(\partial \mathcal H/\partial \bar p_k\) 的系数必须分别相等，于是得到
+\[
+\{\bar q_j,\bar q_k\}=0,\qquad
+\{\bar q_j,\bar p_k\}=\delta_{jk}.
+\]
+同理，从新动量的时间演化出发。由 \((2.7.17)\) 式可写成
+\[
+\dot{\bar p}_j=\{\bar p_j,\mathcal H\}.
+\]
+再对 \(\mathcal H(\bar q,\bar p)\) 使用链式法则，有
+\[
+\{\bar p_j,\mathcal H\}
+=
+\sum_k
+\left(
+\frac{\partial \mathcal H}{\partial \bar q_k}
+\{\bar p_j,\bar q_k\}
++
+\frac{\partial \mathcal H}{\partial \bar p_k}
+\{\bar p_j,\bar p_k\}
+\right).
+\]
+若新变量仍满足哈密顿正则方程，则
+\[
+\dot{\bar p}_j=-\frac{\partial \mathcal H}{\partial \bar q_j}.
+\]
+因此
+\[
+\sum_k
+\left(
+\frac{\partial \mathcal H}{\partial \bar q_k}
+\{\bar p_j,\bar q_k\}
++
+\frac{\partial \mathcal H}{\partial \bar p_k}
+\{\bar p_j,\bar p_k\}
+\right)
+=
+-\frac{\partial \mathcal H}{\partial \bar q_j}.
+\]
+同样，由于该式对任意 \(\mathcal H\) 成立，比较各偏导数前的系数，得到
+\[
+\{\bar p_j,\bar q_k\}=-\delta_{jk},\qquad
+\{\bar p_j,\bar p_k\}=0.
+\]
+综上，新变量满足
+\[
+\{\bar q_j,\bar q_k\}=0,\qquad
+\{\bar p_j,\bar p_k\}=0,\qquad
+\{\bar q_j,\bar p_k\}=\delta_{jk},
+\]
+并且由泊松括号的反对称性也有
+\[
+\{\bar p_j,\bar q_k\}=-\delta_{jk}.
+\]
+这正是 \((2.7.18)\) 式所表达的正则泊松括号关系。它说明一个变量变换若保持哈密顿正则方程的形式不变，则新变量之间必须满足与旧正则变量相同的基本泊松括号关系。
+\end{solution}
+
+\begin{solution}[正则变换例子]
+\problem{证明到转动参考系的变换
+\[
+\bar{x}=x\cos\theta-y\sin\theta,
+\]
+\[
+\bar{y}=x\sin\theta+y\cos\theta,
+\]
+\[
+\bar{p}_x=p_x\cos\theta-p_y\sin\theta,
+\]
+\[
+\bar{p}_y=p_x\sin\theta+p_y\cos\theta
+\]
+是一个正则变换。}
+\answer
+要证明该变换是正则变换，只需验证新的变量 \((\bar{x},\bar{y},\bar{p}_x,\bar{p}_y)\) 满足与原变量 \((x,y,p_x,p_y)\) 相同的基本泊松括号关系，即
+\[
+\{\bar{x},\bar{y}\}=0,\qquad \{\bar{p}_x,\bar{p}_y\}=0,
+\]
+\[
+\{\bar{x},\bar{p}_x\}=1,\qquad \{\bar{y},\bar{p}_y\}=1,
+\]
+\[
+\{\bar{x},\bar{p}_y\}=0,\qquad \{\bar{y},\bar{p}_x\}=0.
+\]
+在二维相空间中，泊松括号定义为
+\[
+\{f,g\}
+=
+\frac{\partial f}{\partial x}\frac{\partial g}{\partial p_x}
+-\frac{\partial f}{\partial p_x}\frac{\partial g}{\partial x}
++
+\frac{\partial f}{\partial y}\frac{\partial g}{\partial p_y}
+-\frac{\partial f}{\partial p_y}\frac{\partial g}{\partial y}.
+\]
+记 \(c=\cos\theta,\ s=\sin\theta\)，则变换可写为
+\[
+\bar{x}=cx-sy,\qquad \bar{y}=sx+cy,\qquad
+\bar{p}_x=cp_x-sp_y,\qquad \bar{p}_y=sp_x+cp_y.
+\]
+先计算坐标之间的泊松括号。由于 \(\bar{x}\) 和 \(\bar{y}\) 都只依赖 \(x,y\)，不依赖 \(p_x,p_y\)，所以
+\[
+\{\bar{x},\bar{y}\}=0.
+\]
+同理，\(\bar{p}_x\) 和 \(\bar{p}_y\) 都只依赖 \(p_x,p_y\)，不依赖 \(x,y\)，所以
+\[
+\{\bar{p}_x,\bar{p}_y\}=0.
+\]
+下面计算坐标与对应动量的泊松括号。由
+\[
+\frac{\partial\bar{x}}{\partial x}=c,\qquad
+\frac{\partial\bar{x}}{\partial y}=-s,\qquad
+\frac{\partial\bar{p}_x}{\partial p_x}=c,\qquad
+\frac{\partial\bar{p}_x}{\partial p_y}=-s,
+\]
+且 \(\bar{x}\) 不依赖动量、\(\bar{p}_x\) 不依赖坐标，因此
+\[
+\{\bar{x},\bar{p}_x\}
+=
+\frac{\partial\bar{x}}{\partial x}\frac{\partial\bar{p}_x}{\partial p_x}
++
+\frac{\partial\bar{x}}{\partial y}\frac{\partial\bar{p}_x}{\partial p_y}
+=
+c^2+s^2=1.
+\]
+类似地，
+\[
+\frac{\partial\bar{y}}{\partial x}=s,\qquad
+\frac{\partial\bar{y}}{\partial y}=c,\qquad
+\frac{\partial\bar{p}_y}{\partial p_x}=s,\qquad
+\frac{\partial\bar{p}_y}{\partial p_y}=c,
+\]
+所以
+\[
+\{\bar{y},\bar{p}_y\}
+=
+\frac{\partial\bar{y}}{\partial x}\frac{\partial\bar{p}_y}{\partial p_x}
++
+\frac{\partial\bar{y}}{\partial y}\frac{\partial\bar{p}_y}{\partial p_y}
+=
+s^2+c^2=1.
+\]
+再计算交叉泊松括号。由于
+\[
+\frac{\partial\bar{p}_y}{\partial p_x}=s,\qquad
+\frac{\partial\bar{p}_y}{\partial p_y}=c,
+\]
+所以
+\[
+\{\bar{x},\bar{p}_y\}
+=
+\frac{\partial\bar{x}}{\partial x}\frac{\partial\bar{p}_y}{\partial p_x}
++
+\frac{\partial\bar{x}}{\partial y}\frac{\partial\bar{p}_y}{\partial p_y}
+=
+cs-sc=0.
+\]
+同理，
+\[
+\{\bar{y},\bar{p}_x\}
+=
+\frac{\partial\bar{y}}{\partial x}\frac{\partial\bar{p}_x}{\partial p_x}
++
+\frac{\partial\bar{y}}{\partial y}\frac{\partial\bar{p}_x}{\partial p_y}
+=
+sc-cs=0.
+\]
+因此新变量满足
+\[
+\{\bar{x},\bar{y}\}=0,\qquad
+\{\bar{p}_x,\bar{p}_y\}=0,
+\]
+\[
+\{\bar{x},\bar{p}_x\}=1,\qquad
+\{\bar{y},\bar{p}_y\}=1,
+\]
+\[
+\{\bar{x},\bar{p}_y\}=0,\qquad
+\{\bar{y},\bar{p}_x\}=0.
+\]
+这正是正则变量所满足的基本泊松括号关系，因此该转动变换是一个正则变换。
+\end{solution}
+
+
+\begin{solution}[正则变换例子]
+\problem{证明极坐标的变量 \(\rho=(x^2+y^2)^{1/2}\)，\(\phi=\arctan(y/x)\)，
+\[
+p_\rho=\hat{\mathbf e}_\rho\cdot \mathbf p=\frac{xp_x+yp_y}{(x^2+y^2)^{1/2}},
+\qquad
+p_\phi=xp_y-yp_x\;(=l_z)
+\]
+都是正则变量。这里 \(\hat{\mathbf e}_\rho\) 是径向的单位矢量。}
+\answer
+要证明 \((\rho,\phi,p_\rho,p_\phi)\) 是正则变量，只需验证它们满足基本泊松括号关系
+\[
+\{\rho,\phi\}=0,\qquad \{p_\rho,p_\phi\}=0,\qquad
+\{\rho,p_\rho\}=1,\qquad \{\phi,p_\phi\}=1,\qquad
+\{\rho,p_\phi\}=0,\qquad \{\phi,p_\rho\}=0.
+\]
+二维相空间中的泊松括号定义为
+\[
+\{f,g\}=\frac{\partial f}{\partial x}\frac{\partial g}{\partial p_x}-\frac{\partial f}{\partial p_x}\frac{\partial g}{\partial x}+\frac{\partial f}{\partial y}\frac{\partial g}{\partial p_y}-\frac{\partial f}{\partial p_y}\frac{\partial g}{\partial y}.
+\]
+先列出所需偏导数。由
+\[
+\rho=(x^2+y^2)^{1/2},\qquad \phi=\arctan(y/x)
+\]
+可得
+\[
+\frac{\partial \rho}{\partial x}=\frac{x}{\rho},\qquad
+\frac{\partial \rho}{\partial y}=\frac{y}{\rho},\qquad
+\frac{\partial \phi}{\partial x}=-\frac{y}{\rho^2},\qquad
+\frac{\partial \phi}{\partial y}=\frac{x}{\rho^2}.
+\]
+同时
+\[
+p_\rho=\frac{xp_x+yp_y}{\rho},\qquad p_\phi=xp_y-yp_x.
+\]
+由于 \(\rho\) 和 \(\phi\) 都不依赖动量，所以
+\[
+\{\rho,\phi\}=0.
+\]
+下面计算 \(\{\rho,p_\rho\}\)。因为
+\[
+\frac{\partial p_\rho}{\partial p_x}=\frac{x}{\rho},\qquad
+\frac{\partial p_\rho}{\partial p_y}=\frac{y}{\rho},
+\]
+所以
+\[
+\{\rho,p_\rho\}
+=
+\frac{\partial \rho}{\partial x}\frac{\partial p_\rho}{\partial p_x}
++
+\frac{\partial \rho}{\partial y}\frac{\partial p_\rho}{\partial p_y}
+=
+\frac{x^2}{\rho^2}+\frac{y^2}{\rho^2}=1.
+\]
+再计算 \(\{\phi,p_\phi\}\)。因为
+\[
+\frac{\partial p_\phi}{\partial p_x}=-y,\qquad
+\frac{\partial p_\phi}{\partial p_y}=x,
+\]
+所以
+\[
+\{\phi,p_\phi\}
+=
+\frac{\partial \phi}{\partial x}\frac{\partial p_\phi}{\partial p_x}
++
+\frac{\partial \phi}{\partial y}\frac{\partial p_\phi}{\partial p_y}
+=
+\left(-\frac{y}{\rho^2}\right)(-y)
++
+\frac{x}{\rho^2}x
+=
+\frac{x^2+y^2}{\rho^2}=1.
+\]
+接着计算交叉括号。首先
+\[
+\{\rho,p_\phi\}
+=
+\frac{\partial \rho}{\partial x}\frac{\partial p_\phi}{\partial p_x}
++
+\frac{\partial \rho}{\partial y}\frac{\partial p_\phi}{\partial p_y}
+=
+\frac{x}{\rho}(-y)+\frac{y}{\rho}x=0.
+\]
+其次
+\[
+\{\phi,p_\rho\}
+=
+\frac{\partial \phi}{\partial x}\frac{\partial p_\rho}{\partial p_x}
++
+\frac{\partial \phi}{\partial y}\frac{\partial p_\rho}{\partial p_y}
+=
+-\frac{y}{\rho^2}\frac{x}{\rho}
++
+\frac{x}{\rho^2}\frac{y}{\rho}
+=0.
+\]
+最后验证 \(\{p_\rho,p_\phi\}=0\)。先计算
+\[
+\frac{\partial p_\rho}{\partial x}
+=
+\frac{p_x}{\rho}-\frac{x(xp_x+yp_y)}{\rho^3},
+\qquad
+\frac{\partial p_\rho}{\partial y}
+=
+\frac{p_y}{\rho}-\frac{y(xp_x+yp_y)}{\rho^3},
+\]
+以及
+\[
+\frac{\partial p_\phi}{\partial x}=p_y,\qquad
+\frac{\partial p_\phi}{\partial y}=-p_x,\qquad
+\frac{\partial p_\rho}{\partial p_x}=\frac{x}{\rho},\qquad
+\frac{\partial p_\rho}{\partial p_y}=\frac{y}{\rho}.
+\]
+于是
+\[
+\begin{aligned}
+\{p_\rho,p_\phi\}
+&=
+\frac{\partial p_\rho}{\partial x}\frac{\partial p_\phi}{\partial p_x}
+-\frac{\partial p_\rho}{\partial p_x}\frac{\partial p_\phi}{\partial x}
++\frac{\partial p_\rho}{\partial y}\frac{\partial p_\phi}{\partial p_y}
+-\frac{\partial p_\rho}{\partial p_y}\frac{\partial p_\phi}{\partial y}\\
+&=
+\left(\frac{p_x}{\rho}-\frac{x(xp_x+yp_y)}{\rho^3}\right)(-y)
+-\frac{x}{\rho}p_y
++\left(\frac{p_y}{\rho}-\frac{y(xp_x+yp_y)}{\rho^3}\right)x
+-\frac{y}{\rho}(-p_x)\\
+&=
+-\frac{yp_x}{\rho}+\frac{xy(xp_x+yp_y)}{\rho^3}
+-\frac{xp_y}{\rho}
++\frac{xp_y}{\rho}-\frac{xy(xp_x+yp_y)}{\rho^3}
++\frac{yp_x}{\rho}
+=0.
+\end{aligned}
+\]
+综上，
+\[
+\{\rho,\phi\}=0,\qquad \{p_\rho,p_\phi\}=0,\qquad
+\{\rho,p_\rho\}=1,\qquad \{\phi,p_\phi\}=1,
+\]
+\[
+\{\rho,p_\phi\}=0,\qquad \{\phi,p_\rho\}=0.
+\]
+这些正是正则变量所要求的基本泊松括号关系，因此 \((\rho,\phi,p_\rho,p_\phi)\) 构成一组正则变量。
+\end{solution}
+
+
+
+\begin{solution}[正则变换例子]
+\problem{证明从变量 \(\mathbf r_1,\mathbf r_2,\mathbf p_1,\mathbf p_2\) 变换到变量 \(\mathbf r_{\rm CM},\mathbf p_{\rm CM},\mathbf r,\mathbf p\) 是一个正则变换。（见习题 2.5.4。）}
+\answer
+设两粒子的质量分别为 \(m_1,m_2\)，总质量为
+\[
+M=m_1+m_2,
+\]
+约化质量为
+\[
+\mu=\frac{m_1m_2}{m_1+m_2}.
+\]
+定义质心坐标、相对坐标、总动量和相对动量为
+\[
+\mathbf r_{\rm CM}=\frac{m_1\mathbf r_1+m_2\mathbf r_2}{M},\qquad
+\mathbf r=\mathbf r_1-\mathbf r_2,
+\]
+\[
+\mathbf p_{\rm CM}=\mathbf p_1+\mathbf p_2,\qquad
+\mathbf p=\mu(\dot{\mathbf r}_1-\dot{\mathbf r}_2).
+\]
+由于 \(\mathbf p_1=m_1\dot{\mathbf r}_1\)，\(\mathbf p_2=m_2\dot{\mathbf r}_2\)，所以
+\[
+\mathbf p
+=
+\frac{m_1m_2}{M}
+\left(
+\frac{\mathbf p_1}{m_1}
+-
+\frac{\mathbf p_2}{m_2}
+\right)
+=
+\frac{m_2\mathbf p_1-m_1\mathbf p_2}{M}.
+\]
+要证明该变换是正则变换，只需验证新变量满足基本泊松括号关系。记各矢量分量为 \(r_{1\alpha},r_{2\alpha},p_{1\alpha},p_{2\alpha}\)，其中 \(\alpha=x,y,z\)。原变量满足
+\[
+\{r_{a\alpha},p_{b\beta}\}=\delta_{ab}\delta_{\alpha\beta},\qquad
+\{r_{a\alpha},r_{b\beta}\}=0,\qquad
+\{p_{a\alpha},p_{b\beta}\}=0,
+\]
+其中 \(a,b=1,2\)。下面逐一计算新变量的泊松括号。
+
+首先，由于 \(\mathbf r_{\rm CM}\) 和 \(\mathbf r\) 都只依赖坐标而不依赖动量，所以
+\[
+\{r_\alpha,r_{{\rm CM},\beta}\}=0.
+\]
+同理，\(\mathbf p\) 和 \(\mathbf p_{\rm CM}\) 都只依赖动量而不依赖坐标，所以
+\[
+\{p_\alpha,p_{{\rm CM},\beta}\}=0.
+\]
+接着计算 \(\{r_\alpha,p_\beta\}\)。由
+\[
+r_\alpha=r_{1\alpha}-r_{2\alpha},\qquad
+p_\beta=\frac{m_2p_{1\beta}-m_1p_{2\beta}}{M},
+\]
+得
+\[
+\begin{aligned}
+\{r_\alpha,p_\beta\}
+&=
+\left\{r_{1\alpha}-r_{2\alpha},
+\frac{m_2p_{1\beta}-m_1p_{2\beta}}{M}
+\right\} \\
+&=
+\frac{m_2}{M}\{r_{1\alpha},p_{1\beta}\}
+-\frac{m_1}{M}\{r_{1\alpha},p_{2\beta}\}
+-\frac{m_2}{M}\{r_{2\alpha},p_{1\beta}\}
++\frac{m_1}{M}\{r_{2\alpha},p_{2\beta}\} \\
+&=
+\frac{m_2}{M}\delta_{\alpha\beta}
++\frac{m_1}{M}\delta_{\alpha\beta}
+=
+\delta_{\alpha\beta}.
+\end{aligned}
+\]
+因此
+\[
+\{r_\alpha,p_\beta\}=\delta_{\alpha\beta}.
+\]
+再计算 \(\{r_\alpha,p_{{\rm CM},\beta}\}\)。由
+\[
+p_{{\rm CM},\beta}=p_{1\beta}+p_{2\beta},
+\]
+有
+\[
+\begin{aligned}
+\{r_\alpha,p_{{\rm CM},\beta}\}
+&=
+\{r_{1\alpha}-r_{2\alpha},p_{1\beta}+p_{2\beta}\}\\
+&=
+\{r_{1\alpha},p_{1\beta}\}
++\{r_{1\alpha},p_{2\beta}\}
+-\{r_{2\alpha},p_{1\beta}\}
+-\{r_{2\alpha},p_{2\beta}\}\\
+&=
+\delta_{\alpha\beta}-\delta_{\alpha\beta}=0.
+\end{aligned}
+\]
+所以
+\[
+\{r_\alpha,p_{{\rm CM},\beta}\}=0.
+\]
+然后计算 \(\{r_{{\rm CM},\alpha},p_\beta\}\)。由
+\[
+r_{{\rm CM},\alpha}=\frac{m_1r_{1\alpha}+m_2r_{2\alpha}}{M},\qquad
+p_\beta=\frac{m_2p_{1\beta}-m_1p_{2\beta}}{M},
+\]
+得
+\[
+\begin{aligned}
+\{r_{{\rm CM},\alpha},p_\beta\}
+&=
+\left\{
+\frac{m_1r_{1\alpha}+m_2r_{2\alpha}}{M},
+\frac{m_2p_{1\beta}-m_1p_{2\beta}}{M}
+\right\}\\
+&=
+\frac{m_1m_2}{M^2}\{r_{1\alpha},p_{1\beta}\}
+-\frac{m_1^2}{M^2}\{r_{1\alpha},p_{2\beta}\}
++\frac{m_2^2}{M^2}\{r_{2\alpha},p_{1\beta}\}
+-\frac{m_1m_2}{M^2}\{r_{2\alpha},p_{2\beta}\}\\
+&=
+\frac{m_1m_2}{M^2}\delta_{\alpha\beta}
+-\frac{m_1m_2}{M^2}\delta_{\alpha\beta}
+=0.
+\end{aligned}
+\]
+因此
+\[
+\{r_{{\rm CM},\alpha},p_\beta\}=0.
+\]
+最后计算 \(\{r_{{\rm CM},\alpha},p_{{\rm CM},\beta}\}\)。有
+\[
+\begin{aligned}
+\{r_{{\rm CM},\alpha},p_{{\rm CM},\beta}\}
+&=
+\left\{
+\frac{m_1r_{1\alpha}+m_2r_{2\alpha}}{M},
+p_{1\beta}+p_{2\beta}
+\right\}\\
+&=
+\frac{m_1}{M}\{r_{1\alpha},p_{1\beta}\}
++\frac{m_1}{M}\{r_{1\alpha},p_{2\beta}\}
++\frac{m_2}{M}\{r_{2\alpha},p_{1\beta}\}
++\frac{m_2}{M}\{r_{2\alpha},p_{2\beta}\}\\
+&=
+\frac{m_1}{M}\delta_{\alpha\beta}
++
+\frac{m_2}{M}\delta_{\alpha\beta}
+=
+\delta_{\alpha\beta}.
+\end{aligned}
+\]
+所以
+\[
+\{r_{{\rm CM},\alpha},p_{{\rm CM},\beta}\}=\delta_{\alpha\beta}.
+\]
+综上，新变量满足
+\[
+\{r_\alpha,p_\beta\}=\delta_{\alpha\beta},\qquad
+\{r_{{\rm CM},\alpha},p_{{\rm CM},\beta}\}=\delta_{\alpha\beta},
+\]
+并且交叉括号为
+\[
+\{r_\alpha,p_{{\rm CM},\beta}\}=0,\qquad
+\{r_{{\rm CM},\alpha},p_\beta\}=0.
+\]
+同时，新坐标之间以及新动量之间的泊松括号也均为零：
+\[
+\{r_\alpha,r_\beta\}=0,\qquad
+\{r_{{\rm CM},\alpha},r_{{\rm CM},\beta}\}=0,\qquad
+\{r_\alpha,r_{{\rm CM},\beta}\}=0,
+\]
+\[
+\{p_\alpha,p_\beta\}=0,\qquad
+\{p_{{\rm CM},\alpha},p_{{\rm CM},\beta}\}=0,\qquad
+\{p_\alpha,p_{{\rm CM},\beta}\}=0.
+\]
+因此 \((\mathbf r,\mathbf p)\) 和 \((\mathbf r_{\rm CM},\mathbf p_{\rm CM})\) 分别构成两组正则共轭变量，且两组变量彼此泊松对易。故从
+\(
+(\mathbf r_1,\mathbf r_2,\mathbf p_1,\mathbf p_2)
+\)
+到
+\(
+(\mathbf r_{\rm CM},\mathbf p_{\rm CM},\mathbf r,\mathbf p)
+\)
+的变换是一个正则变换。
+\end{solution}
+
+
+
+\begin{solution}[正则变换例子]
+\problem{证明
+\[
+\bar q=\ln(q^{-1}\sin p),
+\]
+\[
+\bar p=q\cot p
+\]
+是一个正则变换。}
+\answer
+由于这是单自由度系统，原变量为 \((q,p)\)，新变量为 \((\bar q,\bar p)\)。在单自由度情形下，泊松括号定义为
+\[
+\{f,g\}
+=
+\frac{\partial f}{\partial q}\frac{\partial g}{\partial p}
+-
+\frac{\partial f}{\partial p}\frac{\partial g}{\partial q}.
+\]
+要证明变换是正则变换，只需验证
+\[
+\{\bar q,\bar p\}=1.
+\]
+因为单自由度下任意函数与自身的泊松括号恒为零，所以自动有
+\[
+\{\bar q,\bar q\}=0,\qquad \{\bar p,\bar p\}=0.
+\]
+现在计算 \(\{\bar q,\bar p\}\)。由
+\[
+\bar q=\ln(q^{-1}\sin p)=\ln(\sin p)-\ln q
+\]
+可得
+\[
+\frac{\partial \bar q}{\partial q}=-\frac{1}{q},\qquad
+\frac{\partial \bar q}{\partial p}=\cot p.
+\]
+又因为
+\[
+\bar p=q\cot p,
+\]
+所以
+\[
+\frac{\partial \bar p}{\partial q}=\cot p,\qquad
+\frac{\partial \bar p}{\partial p}=-q\csc^2 p.
+\]
+代入泊松括号定义，得到
+\[
+\begin{aligned}
+\{\bar q,\bar p\}
+&=
+\frac{\partial \bar q}{\partial q}\frac{\partial \bar p}{\partial p}
+-
+\frac{\partial \bar q}{\partial p}\frac{\partial \bar p}{\partial q}\\
+&=
+\left(-\frac{1}{q}\right)(-q\csc^2 p)-(\cot p)(\cot p)\\
+&=
+\csc^2 p-\cot^2 p.
+\end{aligned}
+\]
+利用恒等式
+\[
+\csc^2 p-\cot^2 p=1,
+\]
+可得
+\[
+\{\bar q,\bar p\}=1.
+\]
+因此新变量满足基本正则泊松括号关系
+\[
+\{\bar q,\bar q\}=0,\qquad
+\{\bar p,\bar p\}=0,\qquad
+\{\bar q,\bar p\}=1.
+\]
+所以该变换是一个正则变换。
+\end{solution}
+
+
+
+
+\begin{solution}[正则变换中的动量变换]
+\problem{我们想在这里推导出 \((2.7.9)\) 式，它给出了组态空间中坐标
+\[
+q_i\to \bar q_i(q_1,\cdots,q_n)
+\]
+的变换下，动量的变换。
+
+(1) 如果我们把上面的方程反解得到 \(q=q(\bar q)\)，我们就可以导出下面的 \((2.7.7)\) 式的对应式：
+\[
+\dot q_i=\sum_j\left(\frac{\partial q_i}{\partial \bar q_j}\right)\dot{\bar q}_j.
+\]
+
+(2) 从上式证明
+\[
+\left(\frac{\partial \dot q_i}{\partial \dot{\bar q}_j}\right)_{\bar q}
+=
+\frac{\partial q_i}{\partial \bar q_j}.
+\]
+
+(3) 现在计算
+\[
+\bar p_i=
+\left[\frac{\partial \mathcal L(\bar q,\dot{\bar q})}{\partial \dot{\bar q}_i}\right]_{\bar q}
+=
+\left[\frac{\partial \mathcal L(q,\dot q)}{\partial \dot{\bar q}_i}\right]_{\bar q}.
+\]
+利用链式规则，以及 \(q=q(\bar q)\) 而不是 \(q(\bar q,\dot{\bar q})\)，推导 \((2.7.9)\) 式。
+
+(4) 通过计算 \((2.7.18)\) 式中的泊松括号，证明点变换是正则变换。}
+\answer
+设组态空间中的点变换为
+\[
+\bar q_i=\bar q_i(q_1,\cdots,q_n),
+\]
+并假设该变换可逆，因此可以反解为
+\[
+q_i=q_i(\bar q_1,\cdots,\bar q_n).
+\]
+因为 \(q_i\) 只依赖新的坐标 \(\bar q_j\)，不依赖新的速度 \(\dot{\bar q}_j\)，所以对时间求导时由链式法则得到
+\[
+\dot q_i=\frac{d q_i(\bar q)}{dt}
+=
+\sum_j\frac{\partial q_i}{\partial \bar q_j}\dot{\bar q}_j.
+\]
+这就是 \((2.7.7)\) 式在反变换 \(q=q(\bar q)\) 下的对应形式。
+
+下面证明
+\[
+\left(\frac{\partial \dot q_i}{\partial \dot{\bar q}_j}\right)_{\bar q}
+=
+\frac{\partial q_i}{\partial \bar q_j}.
+\]
+由刚才得到的速度变换式
+\[
+\dot q_i=\sum_k\frac{\partial q_i}{\partial \bar q_k}\dot{\bar q}_k
+\]
+可知，在对 \(\dot{\bar q}_j\) 求偏导时，保持 \(\bar q\) 不变。由于 \(\partial q_i/\partial \bar q_k\) 只是 \(\bar q\) 的函数，在该偏导中应视为常数，因此
+\[
+\left(\frac{\partial \dot q_i}{\partial \dot{\bar q}_j}\right)_{\bar q}
+=
+\sum_k\frac{\partial q_i}{\partial \bar q_k}
+\frac{\partial \dot{\bar q}_k}{\partial \dot{\bar q}_j}
+=
+\sum_k\frac{\partial q_i}{\partial \bar q_k}\delta_{kj}
+=
+\frac{\partial q_i}{\partial \bar q_j}.
+\]
+接下来推导动量变换公式。旧变量下的共轭动量为
+\[
+p_i=\frac{\partial \mathcal L(q,\dot q)}{\partial \dot q_i},
+\]
+新变量下的共轭动量为
+\[
+\bar p_j=\frac{\partial \mathcal L(\bar q,\dot{\bar q})}{\partial \dot{\bar q}_j}.
+\]
+由于只是点变换，\(q=q(\bar q)\)，并且 \(\dot q=\dot q(\bar q,\dot{\bar q})\)，所以
+\[
+\mathcal L(\bar q,\dot{\bar q})
+=
+\mathcal L\bigl(q(\bar q),\dot q(\bar q,\dot{\bar q})\bigr).
+\]
+对 \(\dot{\bar q}_j\) 求偏导，并保持 \(\bar q\) 不变。因为 \(q=q(\bar q)\) 不依赖 \(\dot{\bar q}\)，所以链式法则中只有 \(\dot q_i\) 项贡献：
+\[
+\bar p_j
+=
+\left(\frac{\partial \mathcal L}{\partial \dot{\bar q}_j}\right)_{\bar q}
+=
+\sum_i
+\frac{\partial \mathcal L}{\partial \dot q_i}
+\left(\frac{\partial \dot q_i}{\partial \dot{\bar q}_j}\right)_{\bar q}.
+\]
+利用
+\[
+\frac{\partial \mathcal L}{\partial \dot q_i}=p_i,
+\qquad
+\left(\frac{\partial \dot q_i}{\partial \dot{\bar q}_j}\right)_{\bar q}
+=
+\frac{\partial q_i}{\partial \bar q_j},
+\]
+得到
+\[
+\bar p_j
+=
+\sum_i p_i\frac{\partial q_i}{\partial \bar q_j}.
+\]
+即
+\[
+\boxed{\bar p_j=\sum_i\frac{\partial q_i}{\partial \bar q_j}p_i.}
+\]
+这就是点变换下动量的变换规律，也就是 \((2.7.9)\) 式。它表明动量按照坐标变换雅可比矩阵的逆变换进行变换。
+
+最后证明该点变换是正则变换。需要验证
+\[
+\{\bar q_i,\bar q_j\}=0,\qquad
+\{\bar p_i,\bar p_j\}=0,\qquad
+\{\bar q_i,\bar p_j\}=\delta_{ij}.
+\]
+首先，因为 \(\bar q_i\) 和 \(\bar q_j\) 都只依赖旧坐标 \(q\)，不依赖旧动量 \(p\)，所以
+\[
+\{\bar q_i,\bar q_j\}=0.
+\]
+下面计算 \(\{\bar q_i,\bar p_j\}\)。由
+\[
+\bar p_j=\sum_k\frac{\partial q_k}{\partial \bar q_j}p_k
+\]
+可得
+\[
+\{\bar q_i,\bar p_j\}
+=
+\sum_k
+\frac{\partial q_k}{\partial \bar q_j}
+\{\bar q_i,p_k\},
+\]
+其中 \(\partial q_k/\partial \bar q_j\) 只依赖坐标，和 \(\bar q_i\) 的泊松括号为零。又因为
+\[
+\{\bar q_i,p_k\}
+=
+\frac{\partial \bar q_i}{\partial q_k},
+\]
+所以
+\[
+\{\bar q_i,\bar p_j\}
+=
+\sum_k
+\frac{\partial \bar q_i}{\partial q_k}
+\frac{\partial q_k}{\partial \bar q_j}.
+\]
+根据反函数的链式法则，
+\[
+\sum_k
+\frac{\partial \bar q_i}{\partial q_k}
+\frac{\partial q_k}{\partial \bar q_j}
+=
+\frac{\partial \bar q_i}{\partial \bar q_j}
+=
+\delta_{ij}.
+\]
+因此
+\[
+\{\bar q_i,\bar p_j\}=\delta_{ij}.
+\]
+最后，由泊松括号的反对称性可得
+\[
+\{\bar p_i,\bar q_j\}=-\delta_{ij}.
+\]
+再证明 \(\{\bar p_i,\bar p_j\}=0\)。这可以直接由正则结构推出，也可以显式计算。写成微分形式更简洁：由
+\[
+\bar p_j=\sum_i p_i\frac{\partial q_i}{\partial \bar q_j}
+\]
+可得
+\[
+\sum_j\bar p_j\,d\bar q_j
+=
+\sum_j\sum_i p_i\frac{\partial q_i}{\partial \bar q_j}d\bar q_j
+=
+\sum_i p_i\,dq_i.
+\]
+因此正则一形式保持不变：
+\[
+\sum_i p_i\,dq_i=\sum_j\bar p_j\,d\bar q_j.
+\]
+对两边取外微分，得到
+\[
+\sum_i dp_i\wedge dq_i
+=
+\sum_j d\bar p_j\wedge d\bar q_j,
+\]
+即辛结构保持不变。因此点变换保持基本泊松括号关系，特别有
+\[
+\{\bar p_i,\bar p_j\}=0.
+\]
+综上，
+\[
+\{\bar q_i,\bar q_j\}=0,\qquad
+\{\bar p_i,\bar p_j\}=0,\qquad
+\{\bar q_i,\bar p_j\}=\delta_{ij}.
+\]
+所以由组态空间点变换
+\[
+q_i\to \bar q_i(q_1,\cdots,q_n)
+\]
+以及动量变换
+\[
+\bar p_j=\sum_i\frac{\partial q_i}{\partial \bar q_j}p_i
+\]
+所构成的相空间变换是正则变换。
+\end{solution}
+
+
+\begin{solution}[泊松括号不变性]
+\problem{通过直接计算验证方程 \((2.7.19)\)。使用链式规则从对 \(q,p\) 的导数变成对 \(\bar q,\bar p\) 的导数。收集表示后者的 PB 的各项。}
+\answer
+要证明的是，在正则变换
+\[
+(q,p)\longrightarrow (\bar q,\bar p)
+\]
+下，泊松括号的形式保持不变，即
+\[
+\{\omega,\sigma\}_{q,p}=\{\omega,\sigma\}_{\bar q,\bar p}.
+\]
+这里下标表示泊松括号是用哪一组正则变量计算的。为简化记号，先考虑单自由度情形。按照定义，
+\[
+\{\omega,\sigma\}_{q,p}
+=
+\frac{\partial \omega}{\partial q}\frac{\partial \sigma}{\partial p}
+-
+\frac{\partial \omega}{\partial p}\frac{\partial \sigma}{\partial q}.
+\]
+由于 \(\omega\) 和 \(\sigma\) 可以看成新变量 \(\bar q,\bar p\) 的函数，即
+\[
+\omega=\omega(\bar q,\bar p),\qquad \sigma=\sigma(\bar q,\bar p),
+\]
+而 \(\bar q,\bar p\) 又是 \(q,p\) 的函数，因此由链式法则有
+\[
+\frac{\partial \omega}{\partial q}
+=
+\frac{\partial \omega}{\partial \bar q}\frac{\partial \bar q}{\partial q}
++
+\frac{\partial \omega}{\partial \bar p}\frac{\partial \bar p}{\partial q},
+\qquad
+\frac{\partial \omega}{\partial p}
+=
+\frac{\partial \omega}{\partial \bar q}\frac{\partial \bar q}{\partial p}
++
+\frac{\partial \omega}{\partial \bar p}\frac{\partial \bar p}{\partial p},
+\]
+同理
+\[
+\frac{\partial \sigma}{\partial q}
+=
+\frac{\partial \sigma}{\partial \bar q}\frac{\partial \bar q}{\partial q}
++
+\frac{\partial \sigma}{\partial \bar p}\frac{\partial \bar p}{\partial q},
+\qquad
+\frac{\partial \sigma}{\partial p}
+=
+\frac{\partial \sigma}{\partial \bar q}\frac{\partial \bar q}{\partial p}
++
+\frac{\partial \sigma}{\partial \bar p}\frac{\partial \bar p}{\partial p}.
+\]
+将这些表达式代入 \(\{\omega,\sigma\}_{q,p}\)，得到
+\[
+\begin{aligned}
+\{\omega,\sigma\}_{q,p}
+={}&
+\left(
+\frac{\partial \omega}{\partial \bar q}\frac{\partial \bar q}{\partial q}
++
+\frac{\partial \omega}{\partial \bar p}\frac{\partial \bar p}{\partial q}
+\right)
+\left(
+\frac{\partial \sigma}{\partial \bar q}\frac{\partial \bar q}{\partial p}
++
+\frac{\partial \sigma}{\partial \bar p}\frac{\partial \bar p}{\partial p}
+\right)\\
+&-
+\left(
+\frac{\partial \omega}{\partial \bar q}\frac{\partial \bar q}{\partial p}
++
+\frac{\partial \omega}{\partial \bar p}\frac{\partial \bar p}{\partial p}
+\right)
+\left(
+\frac{\partial \sigma}{\partial \bar q}\frac{\partial \bar q}{\partial q}
++
+\frac{\partial \sigma}{\partial \bar p}\frac{\partial \bar p}{\partial q}
+\right).
+\end{aligned}
+\]
+展开后，含有
+\[
+\frac{\partial \omega}{\partial \bar q}
+\frac{\partial \sigma}{\partial \bar q}
+\]
+的项相互抵消，含有
+\[
+\frac{\partial \omega}{\partial \bar p}
+\frac{\partial \sigma}{\partial \bar p}
+\]
+的项也相互抵消，剩下
+\[
+\begin{aligned}
+\{\omega,\sigma\}_{q,p}
+={}&
+\frac{\partial \omega}{\partial \bar q}
+\frac{\partial \sigma}{\partial \bar p}
+\left(
+\frac{\partial \bar q}{\partial q}\frac{\partial \bar p}{\partial p}
+-
+\frac{\partial \bar q}{\partial p}\frac{\partial \bar p}{\partial q}
+\right)\\
+&+
+\frac{\partial \omega}{\partial \bar p}
+\frac{\partial \sigma}{\partial \bar q}
+\left(
+\frac{\partial \bar p}{\partial q}\frac{\partial \bar q}{\partial p}
+-
+\frac{\partial \bar p}{\partial p}\frac{\partial \bar q}{\partial q}
+\right).
+\end{aligned}
+\]
+括号中的第一项正是
+\[
+\{\bar q,\bar p\}_{q,p}
+=
+\frac{\partial \bar q}{\partial q}\frac{\partial \bar p}{\partial p}
+-
+\frac{\partial \bar q}{\partial p}\frac{\partial \bar p}{\partial q},
+\]
+而第二项是
+\[
+\{\bar p,\bar q\}_{q,p}
+=
+\frac{\partial \bar p}{\partial q}\frac{\partial \bar q}{\partial p}
+-
+\frac{\partial \bar p}{\partial p}\frac{\partial \bar q}{\partial q}.
+\]
+若变换是正则变换，则
+\[
+\{\bar q,\bar p\}_{q,p}=1,\qquad
+\{\bar p,\bar q\}_{q,p}=-1.
+\]
+因此
+\[
+\begin{aligned}
+\{\omega,\sigma\}_{q,p}
+&=
+\frac{\partial \omega}{\partial \bar q}
+\frac{\partial \sigma}{\partial \bar p}
+-
+\frac{\partial \omega}{\partial \bar p}
+\frac{\partial \sigma}{\partial \bar q}\\
+&=
+\{\omega,\sigma\}_{\bar q,\bar p}.
+\end{aligned}
+\]
+所以
+\[
+\boxed{\{\omega,\sigma\}_{q,p}=\{\omega,\sigma\}_{\bar q,\bar p}.}
+\]
+这说明在正则变换下，泊松括号的形式保持不变。对于多自由度系统，证明完全类似，只需把单自由度的泊松括号推广为
+\[
+\{f,g\}
+=
+\sum_i
+\left(
+\frac{\partial f}{\partial q_i}\frac{\partial g}{\partial p_i}
+-
+\frac{\partial f}{\partial p_i}\frac{\partial g}{\partial q_i}
+\right),
+\]
+并利用正则关系
+\[
+\{\bar q_i,\bar q_j\}=0,\qquad
+\{\bar p_i,\bar p_j\}=0,\qquad
+\{\bar q_i,\bar p_j\}=\delta_{ij}.
+\]
+由此同样得到泊松括号在正则变量变换下不变。
+\end{solution}

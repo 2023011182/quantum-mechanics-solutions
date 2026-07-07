@@ -1,12 +1,290 @@
 ﻿% !TeX root = ../../main.tex
 \section{线性算符的矩阵元}
 
-% Write this section's exercise solutions here.
-% Exercise numbers are reset by section, for example 7.3.1.
-% Template:
-% \begin{solution}[short title or source exercise number]
-% \problem{Paste or summarize the problem here.}
-% \answer
-% Write the solution here.
-% \end{solution}
+\begin{solution}[线性算符矩阵表示的作用]
+\problem{算符 $\Omega$ 由矩阵
+\[
+\Omega=\begin{pmatrix}
+0&0&1\\
+1&0&0\\
+0&1&0
+\end{pmatrix}
+\]
+给定，求该算符的作用（在标准基下）。}
 
+\answer
+取三维空间的标准正交基 $\{|1\rangle,|2\rangle,|3\rangle\}$，算符作用由矩阵乘法确定，即 $\Omega|i\rangle$ 等于矩阵第 $i$ 列对应的线性组合。
+
+逐列计算可得：
+\[
+\Omega|1\rangle = |2\rangle,\quad \Omega|2\rangle = |3\rangle,\quad \Omega|3\rangle = |1\rangle.
+\]
+
+因此，该算符将基向量进行循环置换：$1\to2\to3\to1$。
+
+\textbf{结论：}
+$\Omega$ 是一个三维循环置换算符（cyclic permutation operator），在基底上实现
+\[
+|1\rangle\mapsto|2\rangle,\quad |2\rangle\mapsto|3\rangle,\quad |3\rangle\mapsto|1\rangle.
+\]
+\end{solution}
+
+
+\begin{solution}[厄米算符的代数性质]
+\problem{设 $\Omega$ 与 $\Lambda$ 均为厄米算符，讨论下列算符的性质：$(1)\ \Omega\Lambda$；$(2)\ \Omega\Lambda+\Lambda\Omega$；$(3)\ [\Omega,\Lambda]$；$(4)\ i[\Omega,\Lambda]$。}
+
+\answer
+已知 $\Omega^\dagger=\Omega$，$\Lambda^\dagger=\Lambda$，利用伴随运算性质 $(AB)^\dagger=B^\dagger A^\dagger$。
+
+\textbf{(1) $\Omega\Lambda$：}
+
+\[
+(\Omega\Lambda)^\dagger=\Lambda^\dagger \Omega^\dagger=\Lambda\Omega.
+\]
+一般情况下 $\Lambda\Omega\neq \Omega\Lambda$，因此 $\Omega\Lambda$ \textbf{不一定是厄米算符}，仅当 $\Omega$ 与 $\Lambda$ 对易时才为厄米算符。
+
+\textbf{(2) $\Omega\Lambda+\Lambda\Omega$：}
+
+\[
+(\Omega\Lambda+\Lambda\Omega)^\dagger
+=(\Omega\Lambda)^\dagger+(\Lambda\Omega)^\dagger
+=\Lambda\Omega+\Omega\Lambda
+=\Omega\Lambda+\Lambda\Omega.
+\]
+因此该算符\textbf{必为厄米算符}。
+
+\textbf{(3) 对易子 $[\Omega,\Lambda]$：}
+
+\[
+[\Omega,\Lambda]^\dagger=(\Omega\Lambda-\Lambda\Omega)^\dagger
+=\Lambda\Omega-\Omega\Lambda
+=-[\Omega,\Lambda].
+\]
+因此 $[\Omega,\Lambda]$ 为\textbf{反厄米算符}。
+
+\textbf{(4) $i[\Omega,\Lambda]$：}
+
+\[
+(i[\Omega,\Lambda])^\dagger
+=-i[\Omega,\Lambda]^\dagger
+=-i(-[\Omega,\Lambda])
+=i[\Omega,\Lambda].
+\]
+因此 $i[\Omega,\Lambda]$ 为\textbf{厄米算符}。
+
+\textbf{结论：}
+$\Omega\Lambda$一般非厄米；$\Omega\Lambda+\Lambda\Omega$厄米；$[\Omega,\Lambda]$反厄米；$i[\Omega,\Lambda]$厄米。
+\end{solution}
+
+
+\begin{solution}[酉算符乘积仍为酉算符]
+\problem{证明：若 $U$ 与 $V$ 均为酉算符，则它们的乘积 $UV$ 仍为酉算符。}
+
+\answer
+由酉算符定义，$U$ 与 $V$ 满足
+\[
+U^\dagger U = UU^\dagger = I,\quad V^\dagger V = VV^\dagger = I.
+\]
+
+考虑乘积算符 $UV$，计算其伴随：
+\[
+(UV)^\dagger = V^\dagger U^\dagger.
+\]
+
+验证其是否满足酉性条件：
+\[
+(UV)^\dagger (UV) = V^\dagger U^\dagger U V = V^\dagger I V = V^\dagger V = I.
+\]
+同理也有
+\[
+(UV)(UV)^\dagger = U V V^\dagger U^\dagger = U I U^\dagger = U U^\dagger = I.
+\]
+
+因此 $UV$ 满足
+\[
+(UV)^\dagger (UV) = (UV)(UV)^\dagger = I,
+\]
+故 $UV$ 为酉算符。
+
+\textbf{结论：}酉算符的乘积仍为酉算符。
+\end{solution}
+
+
+\begin{solution}[行列式与酉矩阵的性质]
+\problem{假设已知行列式的基本性质：\\
+(1) 什么是行列式；\\
+(2) $\det \Omega^T=\det \Omega$；\\
+(3) $\det(AB)=\det A\det B$。\\
+请证明：一个酉矩阵的行列式是模为 1 的复数。\\
+可先验证二维情形
+$\Omega=\begin{pmatrix}\alpha&\beta\\ \gamma&\delta\end{pmatrix}$。}
+
+\answer
+设 $U$ 为酉矩阵，则满足 $U^\dagger U=I$。
+
+对等式两边取行列式：
+\[
+\det(U^\dagger U)=\det I=1.
+\]
+
+利用行列式乘法性质：
+\[
+\det(U^\dagger U)=\det(U^\dagger)\det(U).
+\]
+
+因此得到
+\[
+\det(U^\dagger)\det(U)=1.
+\]
+
+又由于 $\det(U^\dagger)=\overline{\det(U)}$（复矩阵中伴随等于共轭转置，行列式取复共轭），于是
+\[
+\overline{\det(U)}\det(U)=|\det(U)|^2=1.
+\]
+
+从而得到
+\[
+|\det(U)|=1.
+\]
+
+\textbf{结论：}酉矩阵的行列式必为模为 1 的复数，即可写成 $\det(U)=e^{i\theta}$。
+\end{solution}
+
+\begin{solution}[旋转矩阵的正交性]
+\problem{通过检验矩阵 $R\!\left(\frac{\pi}{2} i\right)$，证明它是酉矩阵（在实数情形下即正交矩阵）。其中
+\[
+R\!\left(\frac{\pi}{2} i\right)=
+\begin{pmatrix}
+1&0&0\\
+0&0&-1\\
+0&1&0
+\end{pmatrix}.
+\]}
+
+\answer
+在实数空间中，酉性等价于正交性，即需验证 $R^T R=I$。
+
+先写出转置：
+\[
+R^T=
+\begin{pmatrix}
+1&0&0\\
+0&0&1\\
+0&-1&0
+\end{pmatrix}.
+\]
+
+计算乘积：
+\[
+R^T R=
+\begin{pmatrix}
+1&0&0\\
+0&0&1\\
+0&-1&0
+\end{pmatrix}
+\begin{pmatrix}
+1&0&0\\
+0&0&-1\\
+0&1&0
+\end{pmatrix}
+=
+\begin{pmatrix}
+1&0&0\\
+0&1&0\\
+0&0&1
+\end{pmatrix}
+=I.
+\]
+
+同理也可验证 $RR^T=I$，因此 $R$ 满足正交矩阵定义。
+
+\textbf{结论：}
+$R\!\left(\frac{\pi}{2} i\right)$ 为正交矩阵，因此在复数意义下也是酉矩阵。
+其几何意义为绕 $x$ 轴旋转 $\frac{\pi}{2}$ 的旋转算符。
+\end{solution}
+
+
+\begin{solution}[酉矩阵与行列式的指数形式]
+\problem{证明下列矩阵均为酉矩阵：
+\[
+A=\frac{1}{\sqrt{2}}\begin{pmatrix}1&i\\ i&1\end{pmatrix},\quad
+B=\frac{1}{2}\begin{pmatrix}1+i&1-i\\ 1-i&1+i\end{pmatrix}.
+\]
+并验证其行列式均可写成 $\exp(i\theta)$ 的形式。最后判断其中是否存在厄米矩阵。}
+
+\answer
+
+\textbf{(1) 验证 $A$ 为酉矩阵：}
+
+计算共轭转置：
+\[
+A^\dagger=\frac{1}{\sqrt{2}}\begin{pmatrix}1&-i\\ -i&1\end{pmatrix}.
+\]
+
+计算：
+\[
+A^\dagger A=\frac{1}{2}
+\begin{pmatrix}1&-i\\ -i&1\end{pmatrix}
+\begin{pmatrix}1&i\\ i&1\end{pmatrix}
+=
+\frac{1}{2}\begin{pmatrix}2&0\\ 0&2\end{pmatrix}=I.
+\]
+故 $A$ 为酉矩阵。
+
+行列式：
+\[
+\det A=\frac{1}{2}(1-i^2)=\frac{1}{2}(2)=1=\exp(0).
+\]
+
+判断厄米性：
+\[
+A^\dagger \neq A,
+\]
+故 $A$ 不是厄米矩阵。
+
+\textbf{(2) 验证 $B$ 为酉矩阵：}
+
+\[
+B^\dagger=\frac{1}{2}
+\begin{pmatrix}
+1-i & 1+i\\
+1+i & 1-i
+\end{pmatrix}.
+\]
+
+计算：
+\[
+B^\dagger B
+=\frac{1}{4}
+\begin{pmatrix}
+1-i & 1+i\\
+1+i & 1-i
+\end{pmatrix}
+\begin{pmatrix}
+1+i & 1-i\\
+1-i & 1+i
+\end{pmatrix}
+=I.
+\]
+
+故 $B$ 为酉矩阵。
+
+行列式：
+\[
+\det B=\frac{1}{4}\big((1+i)^2-(1-i)^2\big)
+= i = \exp(i\pi/2).
+\]
+
+判断厄米性：
+\[
+B^\dagger \neq B,
+\]
+故 $B$ 也不是厄米矩阵。
+
+\textbf{结论：}
+两矩阵均为酉矩阵，其行列式分别为
+\[
+\det A=1=\exp(0),\quad \det B=i=\exp(i\pi/2),
+\]
+且二者均不是厄米矩阵。
+\end{solution}

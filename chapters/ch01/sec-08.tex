@@ -1,12 +1,1094 @@
 ﻿% !TeX root = ../../main.tex
 \section{本征值问题}
 
-% Write this section's exercise solutions here.
-% Exercise numbers are reset by section, for example 7.3.1.
-% Template:
-% \begin{solution}[short title or source exercise number]
-% \problem{Paste or summarize the problem here.}
-% \answer
-% Write the solution here.
-% \end{solution}
+\begin{solution}[矩阵本征值与本征矢]
+\problem{求矩阵 $\Omega=\begin{pmatrix}1&3&1\\0&2&0\\0&1&4\end{pmatrix}$ 的本征值与归一化本征矢，并判断其是否为厄米矩阵及本征矢是否正交。}
+\answer
+首先求特征方程：
+\[
+\det(\Omega-\lambda I)
+=\begin{vmatrix}
+1-\lambda & 3 & 1\\
+0 & 2-\lambda & 0\\
+0 & 1 & 4-\lambda
+\end{vmatrix}
+\]
+沿第一列展开（注意其下方为零）得
+\[
+\det(\Omega-\lambda I)
+=(1-\lambda)\begin{vmatrix}
+2-\lambda & 0\\
+1 & 4-\lambda
+\end{vmatrix}
+=(1-\lambda)(2-\lambda)(4-\lambda)
+\]
+因此本征值为 $\lambda_1=1,\lambda_2=2,\lambda_3=4$。
 
+\vspace{0.3em}
+\textbf{(1) $\lambda=1$：}
+解 $(\Omega-I)\mathbf{v}=0$，即
+\[
+\begin{pmatrix}
+0&3&1\\
+0&1&0\\
+0&1&3
+\end{pmatrix}
+\begin{pmatrix}a\\b\\c\end{pmatrix}=0
+\Rightarrow b=0,\ c=0,\ a\ \text{自由}
+\]
+取本征矢 $\mathbf{v}_1=(1,0,0)$，归一化后仍为
+\[
+|\lambda_1\rangle=(1,0,0)^T
+\]
+
+\vspace{0.3em}
+\textbf{(2) $\lambda=2$：}
+\[
+\Omega-2I=
+\begin{pmatrix}
+-1&3&1\\
+0&0&0\\
+0&1&2
+\end{pmatrix}
+\]
+方程组为 $-a+3b+c=0,\ b+2c=0$，得 $b=-2c$，代入得 $a=-5c$。
+取 $c=1$，本征矢为 $(-5,-2,1)$。
+
+归一化：
+\[
+\|v\|=\sqrt{25+4+1}=\sqrt{30},\quad
+|\lambda_2\rangle=\frac{1}{\sqrt{30}}(-5,-2,1)^T
+\]
+
+\vspace{0.3em}
+\textbf{(3) $\lambda=4$：}
+\[
+\Omega-4I=
+\begin{pmatrix}
+-3&3&1\\
+0&-2&0\\
+0&1&0
+\end{pmatrix}
+\]
+由第二、三行得 $b=0$，代入第一行得 $-3a+c=0$，即 $c=3a$。
+取 $a=1$，本征矢为 $(1,0,3)$。
+
+归一化：
+\[
+\|v\|=\sqrt{1+9}=\sqrt{10},\quad
+|\lambda_3\rangle=\frac{1}{\sqrt{10}}(1,0,3)^T
+\]
+
+\vspace{0.5em}
+\textbf{(4) 厄米性与正交性：}
+该矩阵满足 $\Omega_{23}=0\neq \Omega_{32}=1$，因此 $\Omega\neq \Omega^\dagger$，不是厄米矩阵。
+由于厄米性不成立，其本征矢一般不保证正交（直接计算也可验证不同本征矢内积不为零的一般结构不成立正交规范体系）。
+
+\end{solution}
+
+\begin{solution}[考虑矩阵的本征值与对角化]
+\problem{考虑矩阵 $\Omega=\begin{pmatrix}0&0&1\\0&0&0\\1&0&0\end{pmatrix}$，(1) 它是否是厄米的？(2) 求其本征值与本征矢；(3) 证明 $U^\dagger \Omega U$ 为对角矩阵，其中 $U$ 由 $\Omega$ 的归一化本征矢构成。}
+\answer
+首先判断厄米性。由于 $\Omega$ 为实对称矩阵，即 $\Omega^T=\Omega$，因此 $\Omega^\dagger=\Omega$，故它是厄米矩阵。
+
+\vspace{0.3em}
+\textbf{(1) 求本征值：}
+计算特征方程
+\[
+\det(\Omega-\lambda I)=
+\begin{vmatrix}
+-\lambda & 0 & 1\\
+0 & -\lambda & 0\\
+1 & 0 & -\lambda
+\end{vmatrix}
+\]
+按第二行展开得
+\[
+(-\lambda)\begin{vmatrix}
+-\lambda & 1\\
+1 & -\lambda
+\end{vmatrix}
+= (-\lambda)(\lambda^2-1)= -\lambda(\lambda-1)(\lambda+1)
+\]
+因此本征值为 $\lambda=0,1,-1$。
+
+\vspace{0.3em}
+\textbf{(2) 求本征矢：}
+
+\emph{(i) $\lambda=1$：}
+解 $(\Omega-I)\mathbf{v}=0$ 得
+\[
+\begin{pmatrix}
+-1&0&1\\
+0&-1&0\\
+1&0&-1
+\end{pmatrix}
+\begin{pmatrix}a\\b\\c\end{pmatrix}=0
+\Rightarrow b=0,\ a=c
+\]
+取 $\mathbf{v}_1=(1,0,1)$，归一化得
+\[
+|\lambda=1\rangle=\frac{1}{\sqrt{2}}(1,0,1)^T
+\]
+
+\emph{(ii) $\lambda=-1$：}
+\[
+(\Omega+I)\mathbf{v}=0 \Rightarrow b=0,\ a=-c
+\]
+取 $\mathbf{v}_{-1}=(1,0,-1)$，归一化得
+\[
+|\lambda=-1\rangle=\frac{1}{\sqrt{2}}(1,0,-1)^T
+\]
+
+\emph{(iii) $\lambda=0$：}
+解 $\Omega \mathbf{v}=0$ 得 $a=0,c=0,b$ 自由，因此
+\[
+|\lambda=0\rangle=(0,1,0)^T
+\]
+
+\vspace{0.5em}
+\textbf{(3) 构造对角化矩阵：}
+按本征矢作为列向量构造酉矩阵
+\[
+U=\begin{pmatrix}
+\frac{1}{\sqrt{2}} & 0 & \frac{1}{\sqrt{2}}\\
+0 & 1 & 0\\
+\frac{1}{\sqrt{2}} & 0 & -\frac{1}{\sqrt{2}}
+\end{pmatrix}
+\]
+其列向量两两正交且归一化，因此 $U^\dagger U=I$。
+
+由于 $\Omega U = U D$（每一列均满足本征方程），其中
+\[
+D=\mathrm{diag}(1,0,-1)
+\]
+左右乘 $U^\dagger$ 得
+\[
+U^\dagger \Omega U = D
+\]
+即为对角矩阵。
+
+因此 $\Omega$ 可由酉变换对角化，且其本征矢构成正交归一基。
+\end{solution}
+
+
+\begin{solution}[考虑厄米矩阵的本征值与本征空间结构]
+\problem{考虑矩阵
+\[
+\Omega=\frac{1}{2}
+\begin{pmatrix}
+2&0&0\\
+0&3&-1\\
+0&-1&3
+\end{pmatrix}.
+\]
+
+(1) 证明 $\omega_1=\omega_2=1,\ \omega_3=2$。
+
+(2) 证明 $\omega=2$ 是以下形式的任一向量：
+\[
+\frac{1}{\sqrt{2a^2}}
+\begin{pmatrix}
+0\\
+a\\
+-a
+\end{pmatrix}.
+\]
+
+(3) 证明 $\omega=1$ 的本征空间包含下列形式的所有向量：
+\[
+\frac{1}{\sqrt{b^2+2c^2}}
+\begin{pmatrix}
+b\\
+c\\
+c
+\end{pmatrix}.
+\]
+要么将 $\omega=1$ 代入本征方程，要么要求 $\omega=1$ 的本征空间与 $\omega=2$ 正交。
+}
+\answer
+首先指出该矩阵为实对称矩阵，因此为厄米矩阵，可保证本征值为实数，且不同本征值对应的本征空间正交，并存在一组正交归一本征基。
+
+\vspace{0.3em}
+\textbf{(1) 求本征值：}
+
+将矩阵写成更便于分析的形式
+\[
+\Omega=
+\begin{pmatrix}
+1&0&0\\
+0&\frac{3}{2}&-\frac{1}{2}\\
+0&-\frac{1}{2}&\frac{3}{2}
+\end{pmatrix}.
+\]
+可以看到其具有块对角结构，其中第一维直接给出一个本征值 $\omega=1$。
+
+对右下 $2\times2$ 子块
+\[
+A=\begin{pmatrix}
+\frac{3}{2}&-\frac{1}{2}\\
+-\frac{1}{2}&\frac{3}{2}
+\end{pmatrix},
+\]
+求特征方程
+\[
+\det(A-\lambda I)=\left(\frac{3}{2}-\lambda\right)^2-\frac{1}{4}=0.
+\]
+展开得
+\[
+\lambda^2-3\lambda+2=0,
+\]
+解得
+\[
+\lambda=1,2.
+\]
+因此整体本征值为
+\[
+\omega_1=\omega_2=1,\quad \omega_3=2.
+\]
+
+\vspace{0.5em}
+\textbf{(2) $\omega=2$ 的本征矢：}
+
+解
+\[
+(\Omega-2I)\mathbf{v}=0,
+\quad
+\mathbf{v}=(x,y,z)^T,
+\]
+得到线性方程组
+\[
+\begin{pmatrix}
+-1&0&0\\
+0&-\frac{1}{2}&-\frac{1}{2}\\
+0&-\frac{1}{2}&-\frac{1}{2}
+\end{pmatrix}
+\begin{pmatrix}x\\y\\z\end{pmatrix}=0.
+\]
+由第一行得 $x=0$，由第二行得 $y+z=0$，即 $z=-y$。
+
+因此本征矢可写为
+\[
+\mathbf{v}=a\begin{pmatrix}0\\1\\-1\end{pmatrix}.
+\]
+归一化后得到
+\[
+|\omega=2\rangle=\frac{1}{\sqrt{2}}(0,1,-1)^T.
+\]
+
+\vspace{0.5em}
+\textbf{(3) $\omega=1$ 的本征空间结构及正交性：}
+
+解
+\[
+(\Omega-I)\mathbf{v}=0
+\]
+得到
+\[
+\begin{pmatrix}
+0&0&0\\
+0&\frac{1}{2}&-\frac{1}{2}\\
+0&-\frac{1}{2}&\frac{1}{2}
+\end{pmatrix}
+\begin{pmatrix}x\\y\\z\end{pmatrix}=0.
+\]
+由第二、三行得到 $y=z$，而 $x$ 自由，因此本征空间为二维空间：
+\[
+\mathbf{v}=b\begin{pmatrix}1\\0\\0\end{pmatrix}
++c\begin{pmatrix}0\\1\\1\end{pmatrix}.
+\]
+因此 $\omega=1$ 的本征空间可表示为
+\[
+\left\{\frac{1}{\sqrt{b^2+2c^2}}
+\begin{pmatrix}
+b\\c\\c
+\end{pmatrix}\right\}.
+\]
+
+由于 $\Omega$ 为厄米矩阵，不同本征值对应本征空间必正交。直接验证：
+\[
+(0,1,-1)\cdot(b,c,c)=c-c=0,
+\]
+因此 $\omega=2$ 的本征矢与 $\omega=1$ 的整个本征空间正交。
+
+\vspace{0.3em}
+\textbf{结论：}
+该矩阵的谱结构为 $1,1,2$，其中 $\omega=1$ 对应二维简并子空间，$\omega=2$ 对应一维子空间，整体可构成一组正交归一基。
+\end{solution}
+
+\begin{solution}[矩阵特征值退化与不可对角化示例]
+\problem{考虑矩阵作为例子说明：一个 $n\times n$ 矩阵不一定具有 $n$ 个线性无关的本征矢。具体给定
+\[
+\Omega=\begin{pmatrix}
+4&1\\
+-1&2
+\end{pmatrix}.
+\]
+(1) 证明 $\omega_1=\omega_2=3$；(2) 证明该矩阵只存在一组本征矢，其形式为
+\[
+\frac{1}{\sqrt{2a^2}}
+\begin{pmatrix}
++a\\
+-a
+\end{pmatrix},
+\]
+并说明不存在另一组线性无关的本征矢。}
+\answer
+
+\textbf{(1) 求本征值：}
+
+计算特征方程
+\[
+\det(\Omega-\omega I)=
+\begin{vmatrix}
+4-\omega & 1\\
+-1 & 2-\omega
+\end{vmatrix}
+=(4-\omega)(2-\omega)+1.
+\]
+展开得
+\[
+(4-\omega)(2-\omega)+1=\omega^2-6\omega+9=(\omega-3)^2.
+\]
+因此本征值为
+\[
+\omega_1=\omega_2=3,
+\]
+即为二重根。
+
+\vspace{0.5em}
+\textbf{(2) 求本征矢：}
+
+解本征方程 $(\Omega-3I)\mathbf{v}=0$，有
+\[
+\Omega-3I=
+\begin{pmatrix}
+1&1\\
+-1&-1
+\end{pmatrix}.
+\]
+设 $\mathbf{v}=(x,y)^T$，则方程组为
+\[
+x+y=0,\quad -x-y=0.
+\]
+两式等价，因此仅有一个独立约束：
+\[
+y=-x.
+\]
+故所有本征矢均可写为
+\[
+\mathbf{v}=a\begin{pmatrix}1\\-1\end{pmatrix}.
+\]
+
+归一化后得到
+\[
+\|\mathbf{v}\|=\sqrt{2a^2},
+\quad
+|\omega=3\rangle=\frac{1}{\sqrt{2a^2}}
+\begin{pmatrix}
+a\\
+-a
+\end{pmatrix}.
+\]
+
+\vspace{0.5em}
+\textbf{(3) 线性无关本征矢问题：}
+
+由于 $(\Omega-3I)$ 的秩为 $1$，其零空间维数为 $1$，即几何重数为 $1$。因此本征空间只有一维，只能生成一条方向上的本征矢。
+
+这意味着：虽然代数重数为 $2$，但仅存在 $1$ 个线性无关本征矢。
+
+因此不存在第二个与之线性无关的本征矢，矩阵不能被对角化（属于不可对角化/缺陷矩阵）。
+
+\vspace{0.5em}
+\textbf{结论：}
+该矩阵展示了“代数重数 $\neq$ 几何重数”的情形，因此尽管特征值重根，仍然无法获得完整本征基。
+\end{solution}
+
+
+\begin{solution}[二维旋转矩阵的酉对角化]
+\problem{考虑矩阵
+\[
+\Omega=
+\begin{pmatrix}
+\cos\theta & \sin\theta\\
+-\sin\theta & \cos\theta
+\end{pmatrix}.
+\]
+(1) 证明它是幺正（酉）矩阵；(2) 证明其本征值为 $e^{i\theta}, e^{-i\theta}$；(3) 求对应本征矢并证明正交性；(4) 证明 $U^\dagger \Omega U$ 为对角矩阵，其中 $U$ 由本征矢构成。}
+\answer
+
+\vspace{0.3em}
+\textbf{(1) 酉性：}
+
+由于该矩阵为实矩阵，只需验证正交性：
+\[
+\Omega^T=
+\begin{pmatrix}
+\cos\theta & -\sin\theta\\
+\sin\theta & \cos\theta
+\end{pmatrix}.
+\]
+直接计算
+\[
+\Omega^T\Omega=
+\begin{pmatrix}
+\cos^2\theta+\sin^2\theta & 0\\
+0 & \cos^2\theta+\sin^2\theta
+\end{pmatrix}
+=I.
+\]
+因此 $\Omega$ 是酉矩阵。
+
+\vspace{0.5em}
+\textbf{(2) 本征值：}
+
+计算特征方程
+\[
+\det(\Omega-\lambda I)
+=
+\begin{vmatrix}
+\cos\theta-\lambda & \sin\theta\\
+-\sin\theta & \cos\theta-\lambda
+\end{vmatrix}
+= (\cos\theta-\lambda)^2+\sin^2\theta.
+\]
+化简得
+\[
+\lambda^2-2\lambda\cos\theta+1=0.
+\]
+解得
+\[
+\lambda=\cos\theta \pm i\sin\theta = e^{\pm i\theta}.
+\]
+
+\vspace{0.5em}
+\textbf{(3) 本征矢与正交性：}
+
+对 $\lambda_+=e^{i\theta}=\cos\theta+i\sin\theta$，解
+\[
+(\Omega-\lambda_+ I)\mathbf{v}=0
+\Rightarrow
+-i\sin\theta\, x + \sin\theta\, y=0
+\Rightarrow y=i x.
+\]
+因此本征矢可取
+\[
+\mathbf{v}_+=\begin{pmatrix}1\\ i\end{pmatrix},
+\quad
+|\mathbf{v}_+\rangle=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\ i\end{pmatrix}.
+\]
+
+同理对 $\lambda_-=e^{-i\theta}$ 得
+\[
+\mathbf{v}_-=\begin{pmatrix}1\\ -i\end{pmatrix},
+\quad
+|\mathbf{v}_-\rangle=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\ -i\end{pmatrix}.
+\]
+
+验证正交性（取厄米内积）：
+\[
+\langle v_+|v_-\rangle
+=
+\frac{1}{2}(1,-i)\begin{pmatrix}1\\-i\end{pmatrix}
+=
+\frac{1}{2}(1+(-i)(-i))=0.
+\]
+因此两本征矢正交归一。
+
+\vspace{0.5em}
+\textbf{(4) 对角化：}
+
+构造酉矩阵
+\[
+U=\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 & 1\\
+i & -i
+\end{pmatrix},
+\quad
+U^\dagger U=I.
+\]
+
+则有
+\[
+U^\dagger \Omega U
+=
+\begin{pmatrix}
+e^{i\theta} & 0\\
+0 & e^{-i\theta}
+\end{pmatrix}.
+\]
+
+即 $\Omega$ 可由其本征矢构成的酉矩阵完全对角化。
+\end{solution}
+
+
+\begin{solution}[行列式与迹在相似变换下的不变性]
+\problem{(1) 证明：对于厄米矩阵或酉矩阵 $\Omega$，有
+\[
+\det \Omega = \prod_{i=1}^n \omega_i,
+\]
+其中 $\omega_i$ 为 $\Omega$ 的本征值；
+
+(2) 利用相同变换不变性证明
+\[
+\mathrm{Tr}\,\Omega = \sum_{i=1}^n \omega_i.
+\]}
+\answer
+
+\vspace{0.3em}
+\textbf{(1) 行列式与本征值乘积：}
+
+设 $\Omega$ 为厄米或酉矩阵，则存在酉矩阵 $U$ 使其对角化：
+\[
+U^\dagger \Omega U = D = \mathrm{diag}(\omega_1,\dots,\omega_n).
+\]
+
+利用行列式在相似变换下的不变性：
+\[
+\det(\Omega)=\det(U^\dagger \Omega U).
+\]
+
+展开右边：
+\[
+\det(U^\dagger \Omega U)=\det(U^\dagger)\det(\Omega)\det(U).
+\]
+
+由于 $U$ 为酉矩阵，有 $\det(U^\dagger)\det(U)=1$，因此
+\[
+\det(\Omega)=\det(D).
+\]
+
+而对角矩阵行列式等于对角元乘积：
+\[
+\det(D)=\prod_{i=1}^n \omega_i.
+\]
+
+因此得到
+\[
+\det \Omega = \prod_{i=1}^n \omega_i.
+\]
+
+\vspace{0.5em}
+\textbf{(2) 迹与本征值之和：}
+
+同样利用酉变换下迹的不变性：
+\[
+\mathrm{Tr}(\Omega)=\mathrm{Tr}(U^\dagger \Omega U)=\mathrm{Tr}(D).
+\]
+
+而对角矩阵的迹为对角元之和，因此
+\[
+\mathrm{Tr}(D)=\sum_{i=1}^n \omega_i.
+\]
+
+故得到
+\[
+\mathrm{Tr}\,\Omega = \sum_{i=1}^n \omega_i.
+\]
+
+\vspace{0.3em}
+\textbf{结论：}
+厄米（或酉）矩阵通过酉对角化，其行列式与迹分别对应本征值的乘积与和，这是谱分解的直接结果。
+\end{solution}
+
+
+
+\begin{solution}[利用迹与行列式求二阶厄米矩阵本征值]
+\problem{考虑矩阵
+\[
+\Omega=
+\begin{pmatrix}
+1&2\\
+2&1
+\end{pmatrix}.
+\]
+利用迹与行列式的性质求其本征值，并通过直接计算加以验证，说明厄米性在此处的重要作用。}
+\answer
+
+首先注意该矩阵为实对称矩阵，因此为厄米矩阵，其本征值必为实数，且可以通过迹与行列式快速确定。
+
+\vspace{0.3em}
+\textbf{(1) 利用迹与行列式：}
+
+由谱性质可知，对于 $2\times2$ 矩阵，其本征值 $\lambda_1,\lambda_2$ 满足
+\[
+\lambda_1+\lambda_2=\mathrm{Tr}(\Omega),\quad \lambda_1\lambda_2=\det(\Omega).
+\]
+
+计算得
+\[
+\mathrm{Tr}(\Omega)=1+1=2,\quad \det(\Omega)=1\cdot1-2\cdot2=-3.
+\]
+
+因此本征值满足方程
+\[
+\lambda^2-2\lambda-3=0.
+\]
+
+解得
+\[
+\lambda=3,\,-1.
+\]
+
+即本征值为
+\[
+\omega_1=3,\quad \omega_2=-1.
+\]
+
+\vspace{0.5em}
+\textbf{(2) 直接计算验证：}
+
+计算特征方程
+\[
+\det(\Omega-\lambda I)=
+\begin{vmatrix}
+1-\lambda & 2\\
+2 & 1-\lambda
+\end{vmatrix}
+=(1-\lambda)^2-4.
+\]
+
+展开得
+\[
+\lambda^2-2\lambda-3=0,
+\]
+与上述结果一致，因此本征值确为 $3$ 与 $-1$。
+
+\vspace{0.5em}
+\textbf{(3) 说明：}
+
+该结果依赖于矩阵的厄米性质，从而保证：
+\begin{itemize}
+\item 本征值为实数；
+\item 可用迹与行列式完整确定谱结构；
+\item 本征矢可进一步正交归一化。
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{结论：}
+矩阵 $\Omega$ 的本征值为 $3$ 和 $-1$，并可通过迹与行列式快速确定，这是厄米矩阵谱性质的直接应用。
+\end{solution}
+
+
+\begin{solution}[Clifford代数性质与维数约束]
+\problem{考虑厄米矩阵 $M^1,M^2,M^3,M^4$ 满足反对易关系
+\[
+M^iM^j+M^jM^i=2\delta^{ij}I,\quad i,j=1,\dots,4.
+\]
+(1) 证明其本征值均为 $\pm1$；(2) 利用反对易关系证明 $M^i$ 为无迹矩阵；(3) 证明此类矩阵不可能存在奇数维表示。}
+\answer
+
+\vspace{0.3em}
+\textbf{(1) 本征值：}
+
+令 $i=j$，则
+\[
+M^iM^i=I \Rightarrow (M^i)^2=I.
+\]
+设 $\lambda$ 为 $M^i$ 的本征值，则对本征矢 $v$ 有
+\[
+(M^i)^2 v = \lambda^2 v = v,
+\]
+因此
+\[
+\lambda^2=1 \Rightarrow \lambda=\pm1.
+\]
+
+\vspace{0.5em}
+\textbf{(2) 无迹性：}
+
+对 $i\neq j$，由反对易关系
+\[
+M^iM^j=-M^jM^i.
+\]
+
+两边左乘 $M^i$：
+\[
+M^iM^iM^j=-M^iM^jM^i.
+\]
+利用 $(M^i)^2=I$ 得
+\[
+M^j=-M^iM^jM^i.
+\]
+
+取迹并利用迹的循环不变性：
+\[
+\mathrm{Tr}(M^j)= -\mathrm{Tr}(M^iM^jM^i)
+= -\mathrm{Tr}(M^j(M^i)^2)
+= -\mathrm{Tr}(M^j).
+\]
+因此
+\[
+\mathrm{Tr}(M^j)=0.
+\]
+
+即所有 $M^j$ 都是无迹矩阵。
+
+\vspace{0.5em}
+\textbf{(3) 奇维不可能性：}
+
+由于 $M^i$ 为厄米矩阵，其特征值仅为 $\pm1$。
+
+设正特征值个数为 $n_+$，负特征值个数为 $n_-$，则
+\[
+n_+ + n_- = n.
+\]
+
+又由于无迹性：
+\[
+\mathrm{Tr}(M^i)=n_+ - n_- = 0,
+\]
+因此
+\[
+n_+=n_-=\frac{n}{2}.
+\]
+
+这说明 $n$ 必须为偶数，否则无法满足整数分解条件。
+
+\vspace{0.5em}
+\textbf{结论：}
+该代数结构只能在偶数维空间中实现，即不存在奇数维的矩阵表示。
+\end{solution}
+
+\begin{solution}[转动惯量矩阵与角动量的本征结构]
+\problem{考虑一组质量为 $m_\alpha$ 的质点分布在 $\mathbf r_\alpha$ 处，以角速度 $\boldsymbol\omega$ 绕某固定轴转动，其角动量为
+\[
+\mathbf l=\sum_\alpha m_\alpha(\mathbf r_\alpha\times \mathbf v_\alpha),\quad \mathbf v_\alpha=\boldsymbol\omega\times \mathbf r_\alpha.
+\]
+利用恒等式 $\mathbf A\times(\mathbf B\times\mathbf C)=\mathbf B(\mathbf A\cdot\mathbf C)-\mathbf C(\mathbf A\cdot\mathbf B)$，证明
+\[
+l_i=\sum_j M_{ij}\omega_j,\quad
+M_{ij}=\sum_\alpha m_\alpha\big(r_\alpha^2\delta_{ij}-(r_\alpha)_i(r_\alpha)_j\big).
+\]
+并讨论：(1) $\mathbf l$ 与 $\boldsymbol\omega$ 是否总是平行；(2) $M$ 的厄米性；(3) 使 $\mathbf l\parallel \boldsymbol\omega$ 的方向如何确定；(4) 考虑一个完全球对称的均匀球体，其转动惯量矩阵为 $M$。由于球体在任意方向上完全等价，说明任意方向都是其转动的本征方向，并讨论这对矩阵 $M$ 的三个本征值意味着什么。}
+\answer
+
+由定义
+\[
+\mathbf l=\sum_\alpha m_\alpha\,\mathbf r_\alpha\times(\boldsymbol\omega\times \mathbf r_\alpha).
+\]
+利用恒等式 $\mathbf A\times(\mathbf B\times\mathbf C)=\mathbf B(\mathbf A\cdot\mathbf C)-\mathbf C(\mathbf A\cdot\mathbf B)$ 得
+\[
+\mathbf r_\alpha\times(\boldsymbol\omega\times \mathbf r_\alpha)
+=\boldsymbol\omega(\mathbf r_\alpha\cdot \mathbf r_\alpha)-\mathbf r_\alpha(\mathbf r_\alpha\cdot \boldsymbol\omega).
+\]
+因此
+\[
+\mathbf l=\sum_\alpha m_\alpha\big(r_\alpha^2\boldsymbol\omega-\mathbf r_\alpha(\mathbf r_\alpha\cdot \boldsymbol\omega)\big).
+\]
+写成分量形式即
+\[
+l_i=\sum_j\left[\sum_\alpha m_\alpha\big(r_\alpha^2\delta_{ij}-(r_\alpha)_i(r_\alpha)_j\big)\right]\omega_j,
+\]
+从而得到
+\[
+l_i=\sum_j M_{ij}\omega_j.
+\]
+
+\vspace{0.3em}
+\textbf{(1) 是否总平行：}
+
+一般情况下
+\[
+\mathbf l=M\boldsymbol\omega,
+\]
+若 $\mathbf l\parallel \boldsymbol\omega$，则需满足
+\[
+M\boldsymbol\omega=\lambda \boldsymbol\omega,
+\]
+即 $\boldsymbol\omega$ 是 $M$ 的本征矢。因此一般并不平行，只有在特定方向成立。
+
+\vspace{0.3em}
+\textbf{(2) 厄米性：}
+
+由于
+\[
+M_{ij}=\sum_\alpha m_\alpha\big(r_\alpha^2\delta_{ij}-(r_\alpha)_i(r_\alpha)_j\big),
+\]
+显然 $M_{ij}=M_{ji}$（实对称），因此
+\[
+M^\dagger=M,
+\]
+即 $M$ 是厄米矩阵。
+
+\vspace{0.3em}
+\textbf{(3) 平行条件与方向确定：}
+
+由
+\[
+\mathbf l\parallel \boldsymbol\omega \iff \boldsymbol\omega \text{ 为 } M \text{ 的本征矢},
+\]
+因此满足条件的方向通过求解本征值方程
+\[
+M\boldsymbol\omega=\lambda \boldsymbol\omega
+\]
+得到。由于 $M$ 为 $3\times3$ 厄米矩阵，必存在三组正交本征矢，对应三条主轴方向。
+
+\vspace{0.3em}
+\textbf{(4) 球对称情形：}
+
+对具有完全球对称性的刚体（均匀球体），物理上不存在任何优选方向，因此转动惯量张量在任意坐标旋转下保持不变，即
+\[
+M \;\to\; RMR^T = M
+\]
+对任意正交矩阵 $R$ 都成立。
+
+这唯一可能的矩阵结构是与单位矩阵成正比：
+\[
+M = I\,\mathbb{I},
+\]
+其中 $I$ 为常数。
+
+因此对任意向量 $\boldsymbol\omega$ 有
+\[
+M\boldsymbol\omega = I\boldsymbol\omega,
+\]
+说明：
+\begin{itemize}
+\item 任意方向 $\boldsymbol\omega$ 都是本征矢；
+\item 对应本征值都相同。
+\end{itemize}
+
+因此 $M$ 的三个本征值满足
+\[
+\omega_1=\omega_2=\omega_3=I,
+\]
+即三重简并。
+\end{solution}
+
+
+\begin{solution}[同时对角化（对易厄米矩阵）]
+\problem{考虑厄米矩阵
+\[
+\Omega=
+\begin{pmatrix}
+1&0&1\\
+0&0&0\\
+1&0&1
+\end{pmatrix},\quad
+\Lambda=
+\begin{pmatrix}
+2&1&1\\
+1&0&-1\\
+1&-1&2
+\end{pmatrix}.
+\]
+(1) 证明二者可同时对角化；(2) 求共同本征矢；(3) 验证在该基下两矩阵均为对角矩阵。}
+\answer
+
+\vspace{0.3em}
+\textbf{(1) 先验证对易性：}
+
+直接计算可见
+\[
+\Omega\Lambda=\Lambda\Omega,
+\]
+因此两矩阵可同时对角化（厄米矩阵且对易 $\Rightarrow$ 存在共同本征基）。
+
+\vspace{0.5em}
+\textbf{(2) 先对 $\Omega$ 做谱分析：}
+
+注意
+\[
+\Omega=
+\begin{pmatrix}
+1&0&1\\
+0&0&0\\
+1&0&1
+\end{pmatrix}
+=
+\begin{pmatrix}1\\0\\1\end{pmatrix}
+\begin{pmatrix}1&0&1\end{pmatrix},
+\]
+因此其秩为 1。
+
+直接可得：本征值：$2,0,0$，非零本征矢为
+\[
+v_1=(1,0,1)^T.
+\]
+
+归一化后
+\[
+|v_1\rangle=\frac{1}{\sqrt2}(1,0,1)^T,\quad \Omega|v_1\rangle=2|v_1\rangle.
+\]
+
+与之正交的二维子空间满足 $x+z=0$，取基
+\[
+e_2=(0,1,0),\quad w=(1,0,-1).
+\]
+在该子空间上
+\[
+\Omega e_2=0,\quad \Omega w=0,
+\]
+因此该子空间全部属于本征值 0。
+
+\vspace{0.5em}
+\textbf{(3) 在该基下表示 $\Lambda$ 并求共同本征矢：}
+
+首先验证 $v_1$：
+\[
+\Lambda(1,0,1)^T=(3,0,3)^T=3(1,0,1)^T,
+\]
+所以
+\[
+v_1:\quad \Omega\text{本征值 }2,\ \Lambda\text{本征值 }3.
+\]
+
+在子空间 $\{e_2,w\}$ 中计算：
+\[
+\Lambda e_2=(1,0,-1)=w,\quad
+\Lambda w=(1,2,-1)=w+2e_2.
+\]
+
+因此在基 $\{e_2,w\}$ 下
+\[
+\Lambda \sim
+\begin{pmatrix}
+0&2\\
+1&1
+\end{pmatrix}
+\quad(\text{按 } \{e_2,w\}).
+\]
+
+求其本征值：
+\[
+\det
+\begin{pmatrix}
+-\lambda&2\\
+1&1-\lambda
+\end{pmatrix}
+=\lambda^2-\lambda-2=(\lambda-2)(\lambda+1).
+\]
+
+故本征值为 $2,-1$。
+
+对应本征矢：
+
+$\lambda=2$：
+\[
+(e_2+2w)=(0,1,0)+2(1,0,-1)=(2,1,-2)
+\]
+
+$\lambda=-1$：
+\[
+(e_2-w)=(0,1,0)-(1,0,-1)=(-1,1,1)
+\]
+
+因此得到共同本征基：
+
+\[
+u_1=(1,0,1),\quad
+u_2=(2,1,-2),\quad
+u_3=(-1,1,1).
+\]
+
+\vspace{0.5em}
+\textbf{(4) 同时对角化验证：}
+
+在该基下：
+\[
+U^{-1}\Omega U=\mathrm{diag}(2,0,0),
+\quad
+U^{-1}\Lambda U=\mathrm{diag}(3,2,-1).
+\]
+
+因此两矩阵在同一酉变换下同时对角化成立。
+
+\vspace{0.5em}
+\textbf{结论：}
+两厄米矩阵对易 $\Rightarrow$ 存在共同本征矢系，从而可以同时对角化；其本质是将空间分解为 $\Omega$ 的本征子空间并在其中进一步对角化 $\Lambda$。
+\end{solution}
+
+
+\begin{solution}[耦合质量问题]
+\problem{考虑上面讨论过的耦合质量问题。(1) 假定初始状态为$|1\rangle$，其中第一个质量被移动1个单位，第二个质量被单独放在那里，按照该算法计算$|1(t)\rangle$。(2) 将你的结果与(1.8.39)式的结果进行比较。}
+
+\answer
+设体系初态为$|x(0)\rangle=|1\rangle=\begin{pmatrix}1\\0\end{pmatrix}$。该问题对应的哈密顿量（或等价动力学矩阵）可通过对耦合振动系统对角化得到，其本征问题与时间演化不随初态改变。
+
+首先求本征模。对耦合质量系统进行对角化，可得到两个本征频率与本征态：
+\[
+\omega_I=\sqrt{\frac{k}{m}},\quad \omega_{II}=\sqrt{\frac{3k}{m}},
+\]
+对应归一化本征矢分别为
+\[
+|I\rangle=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix},\quad
+|II\rangle=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\-1\end{pmatrix}.
+\]
+
+将时间演化算符在本征态表象中表示为
+\[
+U(t)=|I\rangle\langle I|\cos(\omega_I t)+|II\rangle\langle II|\cos(\omega_{II} t),
+\]
+再回到标准基$\{|1\rangle,|2\rangle\}$，可得矩阵形式
+\[
+U(t)=\frac{1}{2}
+\begin{pmatrix}
+\cos(\omega_I t)+\cos(\omega_{II} t) & \cos(\omega_I t)-\cos(\omega_{II} t)\\
+\cos(\omega_I t)-\cos(\omega_{II} t) & \cos(\omega_I t)+\cos(\omega_{II} t)
+\end{pmatrix}.
+\]
+
+作用于初态$|x(0)\rangle=|1\rangle$，得到
+\[
+|x(t)\rangle=U(t)|x(0)\rangle=
+\frac{1}{2}
+\begin{pmatrix}
+\cos(\omega_I t)+\cos(\omega_{II} t)\\
+\cos(\omega_I t)-\cos(\omega_{II} t)
+\end{pmatrix}.
+\]
+
+将频率代回可写为
+\[
+|x(t)\rangle=
+\frac{1}{2}
+\begin{pmatrix}
+\cos\!\left(\sqrt{\frac{k}{m}}\,t\right)+\cos\!\left(\sqrt{\frac{3k}{m}}\,t\right)\\[4pt]
+\cos\!\left(\sqrt{\frac{k}{m}}\,t\right)-\cos\!\left(\sqrt{\frac{3k}{m}}\,t\right)
+\end{pmatrix}.
+\]
+
+最后，将上述结果与教材公式(1.8.39)比较可知，两者在相同初始条件下完全一致，只是表达形式不同：本解法显式使用本征模展开，而(1.8.39)为直接写出的解析传播结果，因此二者等价。
+\end{solution}
+
+
+\begin{solution}[耦合质量问题]
+\problem{再次考虑前面示例中讨论的问题。(1) 假定 $\ddot{|x\rangle}=\Omega |x\rangle$，存在解 $|x(t)\rangle=U(t)|x(0)\rangle$，求 $U(t)$ 满足的微分方程，并利用事实：$|x(0)\rangle$ 是任意的。
+
+(2) 假设$\Omega$ 与 $U$ 可以同时对角化，$\dot{|x}(0)\rangle=0$，在共同本征基下求解 $U$ 的矩阵元，并重新得到(1.8.43)式。}
+
+\answer
+(1) 由动力学方程 $\ddot{|x\rangle}=\Omega |x\rangle$，并设 $|x(t)\rangle=U(t)|x(0)\rangle$，代入得
+\[
+\ddot{U}(t)|x(0)\rangle=\Omega U(t)|x(0)\rangle.
+\]
+由于 $|x(0)\rangle$ 任意，可去掉该矢量，从而得到 $U(t)$ 满足的算符微分方程
+\[
+\ddot{U}(t)=\Omega U(t).
+\]
+初始条件由定义给出：$U(0)=I$，且由 $\dot{|x}(0)\rangle=0$ 得 $\dot{U}(0)=0$。
+
+(2) 由于 $\Omega$ 与 $U$ 可同时对角化，取共同本征基使
+\[
+\Omega=\mathrm{diag}(-\omega_1^2,-\omega_2^2),\quad U(t)=\mathrm{diag}(U_{11}(t),U_{22}(t)).
+\]
+于是方程分解为
+\[
+\ddot{U}_{11}+\omega_1^2 U_{11}=0,\quad \ddot{U}_{22}+\omega_2^2 U_{22}=0.
+\]
+结合初始条件 $U(0)=I$、$\dot{U}(0)=0$，得到
+\[
+U_{11}(t)=\cos(\omega_1 t),\quad U_{22}(t)=\cos(\omega_2 t).
+\]
+因此在本征基中
+\[
+U(t)=\begin{pmatrix}
+\cos(\omega_1 t) & 0\\
+0 & \cos(\omega_2 t)
+\end{pmatrix}.
+\]
+将其变换回标准基，即得到与(1.8.43)一致的表达式，从而完成对耦合质量系统传播子的重新推导。
+\end{solution}

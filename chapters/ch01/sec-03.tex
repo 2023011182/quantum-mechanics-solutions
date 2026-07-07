@@ -1,12 +1,235 @@
 ﻿% !TeX root = ../../main.tex
 \section{对偶空间和狄拉克符号}
 
-% Write this section's exercise solutions here.
-% Exercise numbers are reset by section, for example 7.3.1.
-% Template:
-% \begin{solution}[short title or source exercise number]
-% \problem{Paste or summarize the problem here.}
-% \answer
-% Write the solution here.
-% \end{solution}
+\begin{solution}[Gram-Schmidt 正交规范基的构造]
+\problem{设 $A=3\mathbf{i}+4\mathbf{j}$，$B=2\mathbf{i}-6\mathbf{j}$。利用 Gram-Schmidt 方法由 $A,B$ 生成一组二维空间的正交规范基。此外，能否从这两个向量出发再生成另一组正交规范基？若可以，请给出。}
 
+\answer
+取标准内积 $\langle (x_1,y_1),(x_2,y_2)\rangle=x_1x_2+y_1y_2$。
+
+\textbf{第一组正交规范基（以 $A$ 开始）：}
+
+先对 $A$ 归一化，$\|A\|=\sqrt{3^2+4^2}=5$，故
+\[
+e_1=\frac{A}{\|A\|}=\left(\frac{3}{5},\frac{4}{5}\right).
+\]
+
+计算 $B$ 在 $e_1$ 方向的投影：
+\[
+\langle e_1,B\rangle=\frac{3}{5}\cdot 2+\frac{4}{5}\cdot(-6)=\frac{6-24}{5}=-\frac{18}{5}.
+\]
+因此
+\[
+B_{\perp}=B-\langle e_1,B\rangle e_1=(2,-6)+\frac{18}{5}\left(\frac{3}{5},\frac{4}{5}\right)
+=\left(\frac{104}{25},-\frac{78}{25}\right).
+\]
+
+其范数为
+\[
+\|B_{\perp}\|=\frac{1}{25}\sqrt{104^2+78^2}=\frac{130}{25}=\frac{26}{5}.
+\]
+归一化得
+\[
+e_2=\left(\frac{4}{5},-\frac{3}{5}\right).
+\]
+
+因此第一组正交规范基为
+\[
+\left\{\left(\frac{3}{5},\frac{4}{5}\right),\left(\frac{4}{5},-\frac{3}{5}\right)\right\}.
+\]
+
+\textbf{第二组正交规范基（以 $B$ 开始）：}
+
+先归一化 $B$：
+\[
+\|B\|=\sqrt{4+36}=\sqrt{40}=2\sqrt{10},\quad
+f_1=\frac{B}{\|B\|}=\left(\frac{1}{\sqrt{10}},-\frac{3}{\sqrt{10}}\right).
+\]
+
+计算 $A$ 在 $f_1$ 方向的投影：
+\[
+\langle f_1,A\rangle=\frac{3}{\sqrt{10}}-\frac{12}{\sqrt{10}}=-\frac{9}{\sqrt{10}}.
+\]
+故
+\[
+A_{\perp}=A-\langle f_1,A\rangle f_1
+=(3,4)+\frac{9}{10}(1,-3)=\left(\frac{39}{10},\frac{13}{10}\right).
+\]
+
+其范数为
+\[
+\|A_{\perp}\|=\frac{1}{10}\sqrt{39^2+13^2}
+=\frac{1}{10}\sqrt{1690}=\frac{13\sqrt{10}}{10}.
+\]
+归一化得到
+\[
+f_2=\left(\frac{3}{\sqrt{10}},\frac{1}{\sqrt{10}}\right).
+\]
+
+因此第二组正交规范基为
+\[
+\left\{\left(\frac{1}{\sqrt{10}},-\frac{3}{\sqrt{10}}\right),\left(\frac{3}{\sqrt{10}},\frac{1}{\sqrt{10}}\right)\right\}.
+\]
+
+\textbf{结论：}可以从同一组向量出发得到不同的正交规范基，差异来源于 Gram-Schmidt 过程中的起始向量选择顺序。
+\end{solution}
+
+
+\begin{solution}[Gram-Schmidt 正交规范基构造]
+\problem{给定向量组 $|I\rangle=(3,0,0)^T$，$|II\rangle=(0,1,2)^T$，$|III\rangle=(0,2,5)^T$，通过 Gram-Schmidt 方法求其对应的一组正交规范基。}
+
+\answer
+在标准内积 $\langle x,y\rangle=x^\mathsf{T}y$ 下进行 Gram-Schmidt 正交化。
+
+\textbf{第一步：取 $|I\rangle$ 归一化}
+\[
+\|I\|=3,\quad |1\rangle=\frac{|I\rangle}{\|I\|}=(1,0,0)^T.
+\]
+
+\textbf{第二步：构造第二个正交向量}
+\[
+|2'\rangle=|II\rangle-|1\rangle\langle 1|II\rangle.
+\]
+由于 $\langle 1|II\rangle=0$，故
+\[
+|2'\rangle=(0,1,2)^T,\quad \|2'\|=\sqrt{5},
+\]
+从而
+\[
+|2\rangle=\frac{1}{\sqrt{5}}(0,1,2)^T.
+\]
+
+\textbf{第三步：构造第三个正交向量}
+\[
+|3'\rangle=|III\rangle-|1\rangle\langle 1|III\rangle-|2\rangle\langle 2|III\rangle.
+\]
+先计算投影系数：
+\[
+\langle 1|III\rangle=0,\quad \langle 2|III\rangle=\frac{1}{\sqrt{5}}(2+10)=\frac{12}{\sqrt{5}}.
+\]
+因此
+\[
+|3'\rangle=(0,2,5)^T-\frac{12}{\sqrt{5}}|2\rangle
+=(0,2,5)^T-\frac{12}{5}(0,1,2)^T=(0,-\tfrac{2}{5},\tfrac{1}{5})^T.
+\]
+其范数为
+\[
+\|3'\|=\sqrt{\frac{4+1}{25}}=\frac{\sqrt{5}}{5},
+\]
+归一化得
+\[
+|3\rangle=\frac{1}{\sqrt{5}}(0,-2,1)^T.
+\]
+
+\textbf{结论：}
+该向量组对应的一组正交规范基为
+\[
+|1\rangle=(1,0,0)^T,\quad |2\rangle=\left(0,\frac{1}{\sqrt{5}},\frac{2}{\sqrt{5}}\right)^T,\quad
+|3\rangle=\left(0,-\frac{2}{\sqrt{5}},\frac{1}{\sqrt{5}}\right)^T.
+\]
+\end{solution}
+
+
+\begin{solution}[柯西—施瓦茨不等式（Schwarz Equality）]
+\problem{证明柯西—施瓦茨不等式，并讨论等号成立条件：设矢量 $|V\rangle, |W\rangle$，证明
+\[
+\langle V|V\rangle \ge \frac{\langle W|V\rangle \langle V|W\rangle}{\langle W|W\rangle},
+\]
+并说明何时取等号。}
+
+\answer
+考虑构造矢量
+\[
+|Z\rangle = |V\rangle - \frac{\langle W|V\rangle}{\langle W|W\rangle}|W\rangle.
+\]
+由于内积满足正定性，有 $\langle Z|Z\rangle \ge 0$。
+
+展开计算：
+\[
+\langle Z|Z\rangle
+=\left\langle V - \frac{\langle W|V\rangle}{\langle W|W\rangle}W \,\middle|\, V - \frac{\langle W|V\rangle}{\langle W|W\rangle}W \right\rangle.
+\]
+
+利用内积的线性性与共轭对称性 $\langle W|V\rangle^*=\langle V|W\rangle$，展开得
+\[
+\langle Z|Z\rangle
+=\langle V|V\rangle
+-\frac{\langle W|V\rangle \langle V|W\rangle}{\langle W|W\rangle}
+-\frac{\langle V|W\rangle \langle W|V\rangle}{\langle W|W\rangle}
++\frac{\langle W|V\rangle \langle V|W\rangle}{\langle W|W\rangle}.
+\]
+
+整理后可得
+\[
+\langle Z|Z\rangle
+=\langle V|V\rangle - \frac{\langle W|V\rangle \langle V|W\rangle}{\langle W|W\rangle} \ge 0.
+\]
+
+因此得到柯西—施瓦茨不等式：
+\[
+\langle V|V\rangle \ge \frac{\langle W|V\rangle \langle V|W\rangle}{\langle W|W\rangle}.
+\]
+
+\textbf{等号成立条件：}
+
+等号成立当且仅当 $\langle Z|Z\rangle=0$，即 $|Z\rangle=0$，因此
+\[
+|V\rangle = \frac{\langle W|V\rangle}{\langle W|W\rangle}|W\rangle,
+\]
+说明 $|V\rangle$ 与 $|W\rangle$ 线性相关（共线）。
+
+\textbf{几何解释：}
+该条件对应于两个向量“方向完全一致”，即一个向量是另一个的数乘。在欧氏空间中，这意味着点积达到最大值
+\[
+|\langle V|W\rangle| = \|V\|\|W\|.
+\]
+
+\end{solution}
+
+\begin{solution}[三角不等式（Triangle Inequality）]
+\problem{从 $|V+W|^2$ 出发证明三角不等式，并要求使用关系 $\operatorname{Re}\langle V|W\rangle \le |\langle V|W\rangle|$ 以及施瓦茨不等式。证明等号成立当且仅当 $|V\rangle = a|W\rangle$（$a$ 为正实数）。}
+
+\answer
+从内积的定义出发展开：
+\[
+|V+W|^2=\langle V+W|V+W\rangle
+=\langle V|V\rangle+\langle V|W\rangle+\langle W|V\rangle+\langle W|W\rangle.
+\]
+因此
+\[
+|V+W|^2=|V|^2+|W|^2+2\operatorname{Re}\langle V|W\rangle.
+\]
+
+利用关系
+\[
+\operatorname{Re}\langle V|W\rangle \le |\langle V|W\rangle|
+\]
+以及柯西—施瓦茨不等式
+\[
+|\langle V|W\rangle|\le \|V\|\|W\|,
+\]
+得到
+\[
+|V+W|^2 \le |V|^2+|W|^2+2|V||W|=(|V|+|W|)^2.
+\]
+取平方根（范数非负）即得三角不等式：
+\[
+|V+W|\le |V|+|W|.
+\]
+
+\textbf{等号成立条件：}
+
+等号成立要求上述两个不等式同时取等号：
+
+(1) $\operatorname{Re}\langle V|W\rangle = |\langle V|W\rangle|$，说明相位为零，即 $\langle V|W\rangle$ 为非负实数；
+
+(2) 柯西—施瓦茨不等式取等号，即 $|V\rangle$ 与 $|W\rangle$ 线性相关。
+
+因此存在标量 $a$ 使得 $|V\rangle=a|W\rangle$。结合(1)要求 $a$ 必须为正实数。
+
+\textbf{结论：}
+\[
+|V+W|\le |V|+|W|,
+\quad \text{且等号成立当且仅当 } |V\rangle=a|W\rangle,\ a>0.
+\]
+\end{solution}
